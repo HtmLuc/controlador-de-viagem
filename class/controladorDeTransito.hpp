@@ -21,9 +21,10 @@ class ControladorDeTransito{
     vector<Viagem*>viagens;
   public:
     void cadastrarCidade( string nome );
-    void cadastrarTrajeto( string nomeOrigem, string nomeDestino, Tipo tipo, int distancia );
-    void cadastrarTransporte( string nome, Tipo tipo, int capacidade, int velocidade, int distancia_entredescansos, int tempo_de_descanso, string localAtual );
+    void cadastrarTrajeto( string nomeOrigem, string nomeDestino, TipoTransporte tipo, float distancia );
+    void cadastrarTransporte( string nome, TipoTransporte tipo, int capacidade, float velocidade, int dist_descansos, int tempo_de_descanso, string localAtual );
     void cadastrarPassageiro( string nome, string localAtual );
+
     void iniciarViagem( string nomeTransporte, vector<string> nomesPassageiros, string nomeOrigem, string nomeDestino );
     void avancarHoras( int horas );
     void relatarEstado();

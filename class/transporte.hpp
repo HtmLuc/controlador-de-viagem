@@ -11,7 +11,7 @@ class Transporte
 {
   private:
     string nome;
-    Tipo tipo;
+    TipoTransporte tipo;
     int capacidade;
     int velocidade;
     int distancia_entre_descansos;
@@ -19,9 +19,9 @@ class Transporte
     int tempo_de_descanso_atual;
     Cidade* localAtual;
   public:
-    Transporte( string nome, Tipo tipo, int capacidade, int velocidade, int distancia_entre_descansos, int tempo_de_descanso, Cidade* localAtual );
+    Transporte( string nome, TipoTransporte tipo, int capacidade, int velocidade, int distancia_entre_descansos, int tempo_de_descanso, Cidade* localAtual );
     string getNome();
-    Tipo getTipo();
+    TipoTransporte getTipo();
     int getCapacidade();
     int getVelocidade();
     int getDistanciaEntreDescansos();

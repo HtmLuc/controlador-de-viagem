@@ -9,13 +9,13 @@ class Trajeto
   private:
     Cidade* origem;
     Cidade* destino;
-    Tipo tipo;
+    TipoTransporte tipo;
     int distancia;
   public:
-    Trajeto( Cidade* origem, Cidade* destino, Tipo tipo, int distancia );
+    Trajeto( Cidade* origem, Cidade* destino, TipoTransporte tipo, int distancia );
     Cidade* getOrigem();
     Cidade* getDestino();
-    Tipo getTipo();
+    TipoTransporte getTipo();
     int getDistancia();
 };
 
