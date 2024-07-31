@@ -1,0 +1,10 @@
+#ifndef TIPOTRANSPORTE_HPP
+#define TIPOTRANSPORTE_HPP
+
+enum Tipo
+{
+  AQUATICO,
+  TERRESTRE
+};
+
+#endif
