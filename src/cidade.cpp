@@ -1,6 +1,8 @@
-Cidade::Cidade( string nome )
+#include "../class/cidade.hpp"
+
+Cidade::Cidade(string nome)
 {
-  this.nome = nome;
+  this->nome = nome;
 }
 
 string Cidade::getNome()
