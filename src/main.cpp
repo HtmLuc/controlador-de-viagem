@@ -5,7 +5,7 @@ using namespace std;
 
 void menu()
 {
-  cout << "O que você pretende fazer hoje?" << endl << endl;
+  cout << "O que você pretende fazer hoje?" << endl << endl; /*mudar a frase*/
   cout << "0. Sair do sistema" << endl;
   cout << "1. Cadastrar cidade" << endl;
   cout << "2. Cadastrar trajeto" << endl;
@@ -56,8 +56,7 @@ int main()
       case 7:
         cout << "case 7" << endl;
         //relatarEstado();
-    }
-  }while(opcao != 0)
+    }  }while(opcao != 0);
 
   return 0;
 }

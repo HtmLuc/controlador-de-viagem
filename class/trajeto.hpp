@@ -10,13 +10,13 @@ class Trajeto
     Cidade* origem;
     Cidade* destino;
     TipoTransporte tipo;
-    int distancia;
+    float distancia;
   public:
-    Trajeto( Cidade* origem, Cidade* destino, TipoTransporte tipo, int distancia );
+    Trajeto( Cidade* origem, Cidade* destino, TipoTransporte tipo, float distancia );
     Cidade* getOrigem();
     Cidade* getDestino();
     TipoTransporte getTipo();
-    int getDistancia();
+    float getDistancia();
 };
 
 #endif
