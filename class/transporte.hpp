@@ -14,22 +14,22 @@ class Transporte
     TipoTransporte tipo;
     int capacidade;
     float velocidade;
-    float distancia_entre_descansos;
-    int tempo_de_descanso;
-    int tempo_de_descanso_atual;
+    int distanciaDescansos;
+    int tempoDescanso;
+    int tempoDescansoAtual;
     Cidade* localAtual;
   public:
-    Transporte( string nome, TipoTransporte tipo, int capacidade, float velocidade, float distancia_entre_descansos, int tempo_de_descanso, Cidade* localAtual );
+    Transporte(string nome, TipoTransporte tipo, int capacidade, float velocidade, int distanciaDescansos, int tempoDescanso, Cidade* localAtual);
     string getNome();
     TipoTransporte getTipo();
     int getCapacidade();
     float getVelocidade();
-    float getDistanciaEntreDescansos();
-    int getTempoDeDescanso();
-    int getTempoDeDescansoAtual();
+    int getDistanciaDescansos();
+    int getTempoDescanso();
+    int getTempoDescansoAtual();
     Cidade* getLocalAtual();
     
-    void setLocalAtual( Cidade* cidade );
+    void setLocalAtual(Cidade* cidade);
 };
 
 #endif

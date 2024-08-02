@@ -10,7 +10,7 @@ class Cidade
   private:
     string nome;
   public:
-    Cidade( string nome );
+    Cidade(string nome);
     string getNome();
 };
 

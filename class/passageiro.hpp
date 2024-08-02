@@ -12,11 +12,11 @@ class Passageiro
     string nome;
     Cidade* localAtual;
   public:
-    Passageiro( string nome, Cidade* localAtual );
+    Passageiro(string nome, Cidade* localAtual);
     string getNome();
     Cidade* getLocalAtual();
 
-    void setLocalAtual( Cidade* local );
+    void setLocalAtual(Cidade* local);
 };
 
 #endif

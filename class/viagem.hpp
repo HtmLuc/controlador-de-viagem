@@ -1,27 +1,27 @@
 #ifndef VIAGEM_HPP
 #define VIAGEM_HPP
 
-#include <vector>
+#include <list>
 #include "transporte.hpp"
 #include "trajeto.hpp"
 #include "passageiro.hpp"
 
-using std::vector;
+using std::list;
 
 class Viagem
 {
 private:
   Transporte* transporte;
-  vector<Passageiro*> passageiros;
+  list<Passageiro*> passageiros;
   Cidade* origem;
   Cidade* destino;
   Viagem* proxima;
   int HorasEmTransito;
   bool emAndamento;
 public:
-  Viagem( Transporte* transporte, vector<Passageiro*>passageiros, Cidade* origem, Cidade* destino );
+  Viagem(Transporte* transporte, list<Passageiro*>passageiros, Cidade* origem, Cidade* destino);
   void iniciarViagem();
-  void avancarHoras( int horas );
+  void avancarHoras(int horas);
   void relatarEstado();
   bool isEmAndamento();
 };
