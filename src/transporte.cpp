@@ -1,54 +1,54 @@
 #include "../class/transporte.hpp"
 
-Transporte::Transporte( string nome, TipoTransporte tipo, int capacidade, float velocidade, float distancia_entre_descansos, int tempo_de_descanso, Cidade* localAtual ){
-    this->nome = nome;
-    this->tipo = tipo;
-    this->capacidade = capacidade;
-    this->velocidade = velocidade;
-    this->distancia_entre_descansos = distancia_entre_descansos;
-    this->tempo_de_descanso = tempo_de_descanso;
-    this->localAtual = localAtual;
+Transporte::Transporte(string nome, TipoTransporte tipo, int capacidade, float velocidade, int distanciaDescansos, int tempoDescanso, Cidade* localAtual){
+  this->nome = nome;
+  this->tipo = tipo;
+  this->capacidade = capacidade;
+  this->velocidade = velocidade;
+  this->distanciaDescansos = distanciaDescansos;
+  this->tempoDescanso = tempoDescanso;
+  this->localAtual = localAtual;
 }
 
 string Transporte::getNome()
 {
-    return nome;
+  return nome;
 }
 
 TipoTransporte Transporte::getTipo()
 {
-    return tipo;
+  return tipo;
 }
 
 int Transporte::getCapacidade()
 {
-    return capacidade;
+  return capacidade;
 }
 
 float Transporte::getVelocidade()
 {
-    return velocidade;
+  return velocidade;
 }
 
-float Transporte::getDistanciaEntreDescansos()
+int Transporte::getDistanciaDescansos()
 {
-    return distancia_entre_descansos;
+  return distanciaDescansos;
 }
 
-int Transporte::getTempoDeDescanso()
+int Transporte::getTempoDescanso()
 {
-    return tempo_de_descanso;
+  return tempoDescanso;
 }
-int Transporte::getTempoDeDescansoAtual(){
-    return tempo_de_descanso_atual;
+int Transporte::getTempoDescansoAtual(){
+  return tempoDescansoAtual;
 }
 
 Cidade* Transporte::getLocalAtual()
 {
-    return localAtual;
+  return localAtual;
 }
 
 void Transporte::setLocalAtual( Cidade* cidade )
 {
-    this->localAtual = cidade;
+  this->localAtual = cidade;
 }
