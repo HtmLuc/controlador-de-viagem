@@ -1,9 +1,12 @@
+#include <fstream>
 #include "../class/controladorDeTransito.hpp"
+
+using namespace std;
 
 void ControladorDeTransito::cadastrarCidade(string nome)
 {
 }
-
+/*
 void ControladorDeTransito::cadastrarTrajeto(string nomeOrigem, string nomeDestino, TipoTransporte tipo, float distancia)
 {
 }
@@ -27,3 +30,4 @@ void ControladorDeTransito::avancarHoras(int horas)
 void ControladorDeTransito::relatarEstado()
 {
 }
+*/
