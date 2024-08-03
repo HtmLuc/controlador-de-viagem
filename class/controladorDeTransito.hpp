@@ -14,11 +14,11 @@ using std::list, std::string;
 
 class ControladorDeTransito{
   private:
-    list<Cidade*>cidades;
-    list<Trajeto*>trajetos;
-    list<Transporte*>transportes;
-    list<Passageiro*>passageiros;
-    list<Viagem*>viagens;
+    list<Cidade*>listaCidades;
+    list<Trajeto*>listaTrajetos;
+    list<Transporte*>listaTransportes;
+    list<Passageiro*>listaPassageiros;
+    list<Viagem*>listaViagens;
   public:
     void cadastrarCidade(string nome);
     void cadastrarTrajeto(string nomeOrigem, string nomeDestino, TipoTransporte tipo, float distancia);
