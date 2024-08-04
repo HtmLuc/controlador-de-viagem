@@ -3,6 +3,12 @@ SOURCES = $(wildcard src/*.cpp)
 OBJECTS = $(patsubst src/%.cpp,obj/%.o,$(SOURCES))
 EXECUTABLE = bin/main
 
+ifeq ($(OS), Windows_NT)
+CLEAR_TERMINAL = cls
+else
+CLEAR_TERMINAL = clear
+endif
+
 all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
@@ -12,9 +18,15 @@ obj/%.o: src/%.cpp
 	g++ $(CFLAGS) -c $< -o $@
 
 .PHONY: run
-run: $(EXECUTABLE)
+run:
+	@$(CLEAR_TERMINAL)
 	./$(EXECUTABLE)
 
-.PHONY: clean
-clean:
+.PHONY: c-run
+c-run: $(EXECUTABLE)
+	@$(CLEAR_TERMINAL)
+	./$(EXECUTABLE)
+
+.PHONY: clear
+clear:
 	rm -f $(OBJECTS) $(EXECUTABLE)
