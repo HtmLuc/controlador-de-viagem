@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cstdlib>
 
 using namespace std;
 
@@ -14,6 +15,15 @@ void menu()
   cout << "5. Iniciar viagem" << endl;
   cout << "6. Avançar horas" << endl;
   cout << "7. Relatório de estado" << endl;
+}
+
+void limparTela()
+{
+  #ifdef _WIN32
+    system("CLS");
+  #else
+    system("clear");
+  #endif
 }
 
 int main()
@@ -37,10 +47,12 @@ int main()
         cout << "Até a próxima!" << endl;
         break;
       case 1:
+        limparTela();
         cout << "case 1" << endl;
         //cadastrarCidade(nomeCidade);
         break;
       case 2:
+        limparTela();
         cout << "case 2" << endl;
         //cadastrarTrajeto(nomeOrigem, nomeDestino, tipo, distancia);
         break;
