@@ -1,4 +1,4 @@
-#include "../class/viagem.hpp"
+#include "../include/viagem.hpp"
 
 Viagem::Viagem( Transporte* transporte, list<Passageiro*>passageiros, Cidade* origem, Cidade* destino )
 {

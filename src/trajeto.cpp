@@ -1,4 +1,4 @@
-#include "../class/trajeto.hpp"
+#include "../include/trajeto.hpp"
 
 Trajeto::Trajeto(Cidade* origem, Cidade* destino, TipoTransporte tipo, float distancia)
 {
