@@ -2,6 +2,7 @@ CFLAGS = -Wall -Wextra -pedantic -Iclass -Iheader
 SOURCES = $(wildcard src/*.cpp)
 OBJECTS = $(patsubst src/%.cpp,obj/%.o,$(SOURCES))
 EXECUTABLE = bin/main
+FILES = data/*.txt
 
 ifeq ($(OS), Windows_NT)
 CLEAR_TERMINAL = cls
@@ -17,16 +18,15 @@ $(EXECUTABLE): $(OBJECTS)
 obj/%.o: src/%.cpp
 	g++ $(CFLAGS) -c $< -o $@
 
-.PHONY: run
-run:
-	@$(CLEAR_TERMINAL)
+.PHONY: s-run
+s-run:
 	./$(EXECUTABLE)
 
-.PHONY: c-run
-c-run: $(EXECUTABLE)
+.PHONY: run
+run: $(EXECUTABLE)
 	@$(CLEAR_TERMINAL)
 	./$(EXECUTABLE)
 
 .PHONY: clear
 clear:
-	rm -f $(OBJECTS) $(EXECUTABLE)
+	rm -f $(OBJECTS) $(EXECUTABLE) $(FILES)
