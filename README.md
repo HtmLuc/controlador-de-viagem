@@ -1,4 +1,4 @@
-# Projeto de gerenciamento de viagem
+# Projeto de gerenciamento de viagens
 
 Projeto desenvolvido para a disciplina de Linguagem de Programação I. Ele tem como objetivo gerenciar o tráfego entre cidades, considerando diferentes tipos de trajetos e meios de transporte
 
