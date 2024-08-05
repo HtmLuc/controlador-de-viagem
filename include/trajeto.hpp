@@ -1,7 +1,7 @@
 #ifndef TRAJETO_HPP
 #define TRAJETO_HPP
 
-#include "../header/tipoTransporte.hpp"
+#include "tipoTransporte.hpp"
 #include "cidade.hpp"
 
 class Trajeto

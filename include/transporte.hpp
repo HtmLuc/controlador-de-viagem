@@ -2,7 +2,7 @@
 #define TRANSPORTE_HPP
 
 #include <string>
-#include "../header/tipoTransporte.hpp"
+#include "tipoTransporte.hpp"
 #include "cidade.hpp"
 
 using std::string;

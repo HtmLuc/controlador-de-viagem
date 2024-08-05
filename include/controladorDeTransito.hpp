@@ -3,7 +3,7 @@
 
 #include <string>
 #include <list>
-#include "../header/tipoTransporte.hpp"
+#include "tipoTransporte.hpp"
 #include "cidade.hpp"
 #include "passageiro.hpp"
 #include "trajeto.hpp"
