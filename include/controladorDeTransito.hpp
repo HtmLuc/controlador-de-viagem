@@ -10,7 +10,7 @@
 #include "transporte.hpp"
 #include "viagem.hpp"
 
-using std::list, std::string;
+using namespace std;
 
 class ControladorDeTransito{
   private:
