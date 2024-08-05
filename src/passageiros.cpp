@@ -1,4 +1,4 @@
-#include "../class/passageiro.hpp"
+#include "../include/passageiro.hpp"
 
 Passageiro::Passageiro(string nome, Cidade* localAtual)
 {

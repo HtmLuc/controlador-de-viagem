@@ -1,12 +1,14 @@
 #include <iostream>
 #include <string>
+#include <limits>
 #include <cstdlib>
+#include "../include/controladorDeTransito.hpp"
 
 using namespace std;
 
-void menu()
+void menu(int &opcao)
 {
-  cout << "O que você pretende fazer hoje?" << endl << endl; /*mudar a frase*/
+  cout << "=-=-=-=-=-=-=-=MENU=-=-=-=-=-=-=-=-=" << endl;
   cout << "0. Sair do sistema" << endl;
   cout << "1. Cadastrar cidade" << endl;
   cout << "2. Cadastrar trajeto" << endl;
@@ -14,7 +16,10 @@ void menu()
   cout << "4. Cadastrar passageiro" << endl;
   cout << "5. Iniciar viagem" << endl;
   cout << "6. Avançar horas" << endl;
-  cout << "7. Relatório de estado" << endl;
+  cout << "7. Relatório de estado" << endl << endl;
+  cout << "Informe uma opção:" << endl;
+  cout << ">>> ";
+  cin >> opcao;
 }
 
 void limparTela()
@@ -28,19 +33,18 @@ void limparTela()
 
 int main()
 {
+  ControladorDeTransito controle;
   int opcao;
+  string nomeCidade;
   
+  cout << "-------------------------------------------------" << endl;
   cout << "Bem-vindo ao sistema de gerenciamento de viagens!" << endl;
   cout << "-------------------------------------------------" << endl << endl;
   
   do
   {
-    menu();
-    cout << "-------------------------------------------------" << endl << endl;
-    cout << "Informe uma opção:" << endl;
-    cout << ">>> ";
-    cin >> opcao;
-
+    menu(opcao);
+    
     switch(opcao)
     {
       case 0:
@@ -48,8 +52,15 @@ int main()
         break;
       case 1:
         limparTela();
-        cout << "case 1" << endl;
-        //cadastrarCidade(nomeCidade);
+
+        cout << "=-=-=-=-=-CADASTRAR CIDADE-=-=-=-=-=" << endl << endl;
+        cout << "Informe o nome da cidade:" << endl;
+        cout << ">>> ";
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        getline(cin, nomeCidade);
+        
+        controle.cadastrarCidade(nomeCidade);
+
         break;
       case 2:
         limparTela();

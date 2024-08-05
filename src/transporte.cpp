@@ -1,4 +1,4 @@
-#include "../class/transporte.hpp"
+#include "../include/transporte.hpp"
 
 Transporte::Transporte(string nome, TipoTransporte tipo, int capacidade, float velocidade, int distanciaDescansos, int tempoDescanso, Cidade* localAtual){
   this->nome = nome;

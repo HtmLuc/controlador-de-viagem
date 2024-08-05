@@ -1,4 +1,4 @@
-#include "../class/cidade.hpp"
+#include "../include/cidade.hpp"
 
 Cidade::Cidade(string nome)
 {
