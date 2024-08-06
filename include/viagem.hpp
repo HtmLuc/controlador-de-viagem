@@ -6,7 +6,7 @@
 #include "trajeto.hpp"
 #include "passageiro.hpp"
 
-using std::list;
+using namespace std; 
 
 class Viagem
 {

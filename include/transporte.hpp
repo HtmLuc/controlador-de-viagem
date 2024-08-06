@@ -5,7 +5,7 @@
 #include "tipoTransporte.hpp"
 #include "cidade.hpp"
 
-using std::string;
+using namespace std;
 
 class Transporte
 {

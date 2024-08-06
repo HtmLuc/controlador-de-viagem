@@ -4,7 +4,7 @@
 #include <string>
 #include "cidade.hpp"
 
-using std::string;
+using namespace std;
 
 class Passageiro
 {
