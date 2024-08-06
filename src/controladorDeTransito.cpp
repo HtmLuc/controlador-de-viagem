@@ -42,14 +42,50 @@ void ControladorDeTransito::cadastrarCidade(string nome)
     }
   }
 }
-/*
+
+
 void ControladorDeTransito::cadastrarTrajeto(string nomeOrigem, string nomeDestino, TipoTransporte tipo, float distancia)
 {
 }
 
+
 void ControladorDeTransito::cadastrarTransporte(string nome, TipoTransporte tipo, int capacidade, float velocidade, float distanciaDescansos, int tempoDescanso, string localAtual)
 {
+  Cidade* cidadeAtual = nullptr;
+  
+  carregarCidade("data/cidade.txt");
+
+  // Verificar se o localAtual já foi cadastrado nos arquivos
+  for(auto& cidade : listaCidades)
+  {
+    if(cidade->getNome() == localAtual)
+    {
+      cidadeAtual = cidade;
+      break;
+    }
+  }
+
+  if(cidadeAtual == nullptr)
+  {
+    cout << "\033[31mERRO: Local Atual não existe.\033[0m" << endl;
+  }
+  else
+  {
+    ofstream arquivo("data/transporte.txt", ios::app);
+    if(arquivo.is_open())
+    {
+      arquivo.seekp(0, ios::end);
+      arquivo << nome << "," << tipo << "," << capacidade << "," << velocidade << "," << distanciaDescansos << "," << tempoDescanso << "," << localAtual << endl;
+      cout << "Transporte cadastrado com sucesso!" << endl;
+      arquivo.close();
+    }
+    else
+    {
+      cout << "\033[31mERRO: Não foi possível abrir o arquivo para escrita." << endl;
+    }
+  }
 }
+
 
 void ControladorDeTransito::cadastrarPassageiro(string nome, string localAtual)
 {
@@ -66,5 +102,18 @@ void ControladorDeTransito::avancarHoras(int horas)
 void ControladorDeTransito::relatarEstado()
 {
 }
-*/
-/**/
+
+void ControladorDeTransito::carregarCidade(string nomeArquivo)
+{
+  ifstream arquivo(nomeArquivo);
+  string linha;
+  while(getline(arquivo, linha))
+  {
+    if(!linha.empty())
+    {
+      Cidade* cidade = new Cidade(linha);
+      listaCidades.push_back(cidade);
+    }
+  }
+}
+

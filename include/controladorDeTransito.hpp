@@ -28,6 +28,9 @@ class ControladorDeTransito{
     void iniciarViagem(string nomeTransporte, list<string> nomesPassageiros, string nomeOrigem, string nomeDestino);
     void avancarHoras(int horas);
     void relatarEstado();
+    
+    // Jogar as cidades para dentro de um lista
+    void carregarCidade(string nomeArquivo);
 };
 
 #endif
