@@ -18,7 +18,7 @@ Caso sua máquina não tenha um dos dois, veja [a página de instalação e conf
 
 - `make`: compila o programa;
 
-- `make s-run`: executa o programa;
+- `make exe`: executa o programa;
 
 - `make run`: compila e executa o programa;
 
