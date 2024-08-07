@@ -35,6 +35,9 @@ void ControladorDeTransito::cadastrarCidade(string nome)
       arquivoEscrita << nome << endl;
       cout << "Cidade cadastrada com sucesso!" << endl;
       arquivoEscrita.close();
+      //incrementando nova cidade na lista;
+      Cidade* cidade = new Cidade(nome);
+      listaCidades.push_back(cidade);
     }
     else
     {
@@ -88,7 +91,7 @@ void ControladorDeTransito::cadastrarTransporte(string nome, TipoTransporte tipo
 
 
 void ControladorDeTransito::cadastrarPassageiro(string nome, string localAtual)
-{
+{  
 }
 
 void ControladorDeTransito::iniciarViagem(string nomeTransporte, list<string> nomesPassageiros, string nomeOrigem, string nomeDestino)

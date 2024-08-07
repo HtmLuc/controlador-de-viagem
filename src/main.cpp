@@ -17,7 +17,7 @@ int main()
 {
   ControladorDeTransito controle;
   int opcao;
-  string nomeCidade, nomeTransporte, localAtual;
+  string nomeCidade, nomeTransporte, localAtual, nomePassageiro;
   TipoTransporte tipo;
   int capacidade, tempoDescanso, entrada;
   float velocidade, distanciaDescanso;
@@ -26,6 +26,7 @@ int main()
   cout << "│Bem-vindo ao sistema de gerenciamento de viagens!│" << endl;
   cout << "└─────────────────────────────────────────────────┘" << endl << endl;
   
+  // Puxando informações do banco de dados
   do
   {
     menu(opcao);
@@ -89,8 +90,19 @@ int main()
         controle.cadastrarTransporte(nomeTransporte, tipo, capacidade, velocidade, distanciaDescanso, tempoDescanso, localAtual);
         break;
       case 4:
-        cout << "case 4" << endl;
-        //cadastrarPassagegiro(nome, localAtual);
+        limparTela();
+
+        cout << "=-=-=-=-CADASTRAR PASSAGEIRO-=-=-=-=" << endl << endl;
+        cout << "Informe o nome do passageiro:" << endl;
+        cout << ">>> ";
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        getline(cin, nomePassageiro);
+
+        cout << "Informe o local atual do passageiro:" << endl;
+        cout << ">>> ";
+        getline(cin, localAtual);
+
+        controle.cadastrarPassageiro(nomePassageiro, localAtual);
         break;
       case 5:
         cout << "case 5" << endl;
