@@ -6,8 +6,10 @@ FILES = data/*.txt
 
 ifeq ($(OS), Windows_NT)
 CLEAR_TERMINAL = cls
+DELETE = erase /Q
 else
 CLEAR_TERMINAL = clear
+DELETE = rm -f
 endif
 
 all: $(EXECUTABLE)
@@ -18,8 +20,9 @@ $(EXECUTABLE): $(OBJECTS)
 obj/%.o: src/%.cpp
 	g++ $(CFLAGS) -c $< -o $@
 
-.PHONY: s-run
-s-run:
+.PHONY: exe
+exe:
+	@$(CLEAR_TERMINAL)
 	./$(EXECUTABLE)
 
 .PHONY: run
@@ -27,6 +30,6 @@ run: $(EXECUTABLE)
 	@$(CLEAR_TERMINAL)
 	./$(EXECUTABLE)
 
-.PHONY: clear
-clear:
-	rm -f $(OBJECTS) $(EXECUTABLE) $(FILES)
+.PHONY: clean
+clean:
+	@$(DELETE) $(OBJECTS) $(EXECUTABLE) $(FILES)
