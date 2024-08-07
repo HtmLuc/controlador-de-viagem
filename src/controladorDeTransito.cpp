@@ -29,14 +29,10 @@ void ControladorDeTransito::cadastrarCidade(string nome)
       arquivo.seekp(0, ios::end);
       arquivo << nome << endl;
       cout << "Cidade cadastrada com sucesso!" << endl;
-<<<<<<< HEAD
-      arquivoEscrita.close();
+      arquivo.close();
       //incrementando nova cidade na lista;
       Cidade* cidade = new Cidade(nome);
       listaCidades.push_back(cidade);
-=======
-      arquivo.close();
->>>>>>> d397035 (:bug: fix: Utilização dos arquivos e listas nas funções)
     }
     else
     {
@@ -50,9 +46,9 @@ void ControladorDeTransito::cadastrarCidade(string nome)
 }
 
 
-// void ControladorDeTransito::cadastrarTrajeto(string nomeOrigem, string nomeDestino, TipoTransporte tipo, float distancia)
-// {
-// }
+void ControladorDeTransito::cadastrarTrajeto(string nomeOrigem, string nomeDestino, TipoTransporte tipo, float distancia)
+{
+}
 
 void ControladorDeTransito::cadastrarTransporte(string nome, TipoTransporte tipo, int capacidade, float velocidade, float distanciaDescansos, int tempoDescanso, string localAtual)
 {
@@ -94,24 +90,18 @@ void ControladorDeTransito::cadastrarTransporte(string nome, TipoTransporte tipo
   }
 }
 
-// void ControladorDeTransito::cadastrarPassageiro(string nome, string localAtual)
-// {
-// }
-
-<<<<<<< HEAD
 void ControladorDeTransito::cadastrarPassageiro(string nome, string localAtual)
-{  
+{
 }
-=======
-// void ControladorDeTransito::iniciarViagem(string nomeTransporte, list<string> nomesPassageiros, string nomeOrigem, string nomeDestino)
-// {
-// }
->>>>>>> d397035 (:bug: fix: Utilização dos arquivos e listas nas funções)
 
-// void ControladorDeTransito::avancarHoras(int horas)
-// {
-// }
+void ControladorDeTransito::iniciarViagem(string nomeTransporte, list<string> nomesPassageiros, string nomeOrigem, string nomeDestino)
+{
+}
 
-// void ControladorDeTransito::relatarEstado()
-// {
-// }
+void ControladorDeTransito::avancarHoras(int horas)
+{
+}
+
+void ControladorDeTransito::relatarEstado()
+{
+}
