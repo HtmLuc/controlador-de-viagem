@@ -29,8 +29,12 @@ class ControladorDeTransito{
     void avancarHoras(int horas);
     void relatarEstado();
     
-    // Jogar as cidades para dentro de um lista
-    void carregarCidade(string nomeArquivo);
+    // Carregar as informações dos arquivos nas listas
+    void carregarCidades();
+    void carregarTrajetos();
+    void carregarTransportes();
+    void carregarPassageiro();
+    void carregarViagens();
 };
 
 #endif
