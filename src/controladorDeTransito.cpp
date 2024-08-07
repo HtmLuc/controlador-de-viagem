@@ -9,55 +9,55 @@ void ControladorDeTransito::cadastrarCidade(string nome)
   string linha;
   bool cidadeExiste = false;
 
-  // Verifica se a cidade existe no arquivo
-  ifstream arquivoLeitura("data/cidade.txt");
-  if(arquivoLeitura.is_open())
+  // Verifica se a cidade já existe
+  for(auto& cidade : listaCidades)
   {
-    while(getline(arquivoLeitura, linha))
+    if(cidade->getNome() == nome)
     {
-      if(linha == nome)
-      {
-        cout << "\033[31mERRO: Já foi cadastrado uma cidade com esse nome.\033[0m" << endl;
-        cidadeExiste = true;
-        break;
-      }
+      cout << "\033[31mERRO: Cidade informada já está cadastrada. Tente novamente.\033[0m" << endl;
+      cidadeExiste = true;
+      break;
     }
   }
-  arquivoLeitura.close();
 
-  // Escreve o nome da cidade no arquivo
   if(!cidadeExiste)
   {
-    ofstream arquivoEscrita("data/cidade.txt", ios::app);
-    if(arquivoEscrita.is_open())
+    // Cadastrar a nova cidade NO ARQUIVO
+    ofstream arquivo("data/cidade.txt", ios::app);
+    if(arquivo.is_open())
     {
-      arquivoEscrita.seekp(0, ios::end);
-      arquivoEscrita << nome << endl;
+      arquivo.seekp(0, ios::end);
+      arquivo << nome << endl;
       cout << "Cidade cadastrada com sucesso!" << endl;
+<<<<<<< HEAD
       arquivoEscrita.close();
       //incrementando nova cidade na lista;
       Cidade* cidade = new Cidade(nome);
       listaCidades.push_back(cidade);
+=======
+      arquivo.close();
+>>>>>>> d397035 (:bug: fix: Utilização dos arquivos e listas nas funções)
     }
     else
     {
       cout << "\033[31mERRO: Não foi possível abir o arquivo para escrita.\033[0m" << endl;
     }
+
+    // Cadastrar a nova cidade NA LISTA
+    Cidade* novaCidade = new Cidade(nome);
+    listaCidades.push_back(novaCidade);
   }
 }
 
 
-void ControladorDeTransito::cadastrarTrajeto(string nomeOrigem, string nomeDestino, TipoTransporte tipo, float distancia)
-{
-}
-
+// void ControladorDeTransito::cadastrarTrajeto(string nomeOrigem, string nomeDestino, TipoTransporte tipo, float distancia)
+// {
+// }
 
 void ControladorDeTransito::cadastrarTransporte(string nome, TipoTransporte tipo, int capacidade, float velocidade, float distanciaDescansos, int tempoDescanso, string localAtual)
 {
   Cidade* cidadeAtual = nullptr;
   
-  carregarCidade("data/cidade.txt");
-
   // Verificar se o localAtual já foi cadastrado nos arquivos
   for(auto& cidade : listaCidades)
   {
@@ -70,10 +70,11 @@ void ControladorDeTransito::cadastrarTransporte(string nome, TipoTransporte tipo
 
   if(cidadeAtual == nullptr)
   {
-    cout << "\033[31mERRO: Local Atual não existe.\033[0m" << endl;
+    cout << "\033[31mERRO: Local Atual não existe. Tente novamente!\033[0m" << endl;
   }
   else
   {
+    // Cadastrar novo transporte NO ARQUIVO
     ofstream arquivo("data/transporte.txt", ios::app);
     if(arquivo.is_open())
     {
@@ -81,6 +82,10 @@ void ControladorDeTransito::cadastrarTransporte(string nome, TipoTransporte tipo
       arquivo << nome << "," << tipo << "," << capacidade << "," << velocidade << "," << distanciaDescansos << "," << tempoDescanso << "," << localAtual << endl;
       cout << "Transporte cadastrado com sucesso!" << endl;
       arquivo.close();
+
+      // Cadastrar novo transporte NA LISTA
+      Transporte* novaCidade = new Transporte(nome, tipo, capacidade, velocidade, distanciaDescansos, tempoDescanso, cidadeAtual);
+      listaTransportes.push_back(novaCidade);
     }
     else
     {
@@ -89,34 +94,24 @@ void ControladorDeTransito::cadastrarTransporte(string nome, TipoTransporte tipo
   }
 }
 
+// void ControladorDeTransito::cadastrarPassageiro(string nome, string localAtual)
+// {
+// }
 
+<<<<<<< HEAD
 void ControladorDeTransito::cadastrarPassageiro(string nome, string localAtual)
 {  
 }
+=======
+// void ControladorDeTransito::iniciarViagem(string nomeTransporte, list<string> nomesPassageiros, string nomeOrigem, string nomeDestino)
+// {
+// }
+>>>>>>> d397035 (:bug: fix: Utilização dos arquivos e listas nas funções)
 
-void ControladorDeTransito::iniciarViagem(string nomeTransporte, list<string> nomesPassageiros, string nomeOrigem, string nomeDestino)
-{
-}
+// void ControladorDeTransito::avancarHoras(int horas)
+// {
+// }
 
-void ControladorDeTransito::avancarHoras(int horas)
-{
-}
-
-void ControladorDeTransito::relatarEstado()
-{
-}
-
-void ControladorDeTransito::carregarCidade(string nomeArquivo)
-{
-  ifstream arquivo(nomeArquivo);
-  string linha;
-  while(getline(arquivo, linha))
-  {
-    if(!linha.empty())
-    {
-      Cidade* cidade = new Cidade(linha);
-      listaCidades.push_back(cidade);
-    }
-  }
-}
-
+// void ControladorDeTransito::relatarEstado()
+// {
+// }

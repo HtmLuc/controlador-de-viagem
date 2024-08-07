@@ -2,9 +2,9 @@
 #include <fstream>
 #include "../include/controladorDeTransito.hpp"
 
-void ControladorDeTransito::carregarCidades(string nomeArquivo)
+void ControladorDeTransito::carregarCidades()
 {
-  ifstream arquivo(nomeArquivo);
+  ifstream arquivo("data/cidade.txt");
   string linha;
   if(arquivo.is_open())
   {
@@ -19,9 +19,9 @@ void ControladorDeTransito::carregarCidades(string nomeArquivo)
   }
 }
 
-void ControladorDeTransito::carregarTrajetos(string nomeArquivo)
+void ControladorDeTransito::carregarTrajetos()
 {
-  ifstream arquivo(nomeArquivo);
+  ifstream arquivo("data/trajeto.txt");
   string linha;
   if(arquivo.is_open())
   {
@@ -35,14 +35,14 @@ void ControladorDeTransito::carregarTrajetos(string nomeArquivo)
   }
  }
 
-void ControladorDeTransito::carregarTransportes(string nomeArquivo)
+void ControladorDeTransito::carregarTransportes()
 {
 }
 
-void ControladorDeTransito::carregarPassageiro(string nomeArquivo)
+void ControladorDeTransito::carregarPassageiro()
 {
 }
 
-void ControladorDeTransito::carregarViagens(string nomeArquivo)
+void ControladorDeTransito::carregarViagens()
 {
 }
