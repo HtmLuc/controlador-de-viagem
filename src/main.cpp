@@ -26,6 +26,7 @@ int main()
   cout << "│Bem-vindo ao sistema de gerenciamento de viagens!│" << endl;
   cout << "└─────────────────────────────────────────────────┘" << endl << endl;
   
+  // Puxando informações dos arquivos
   controle.carregarCidades();
 
   do
