@@ -35,6 +35,8 @@ class ControladorDeTransito{
     void carregarTransportes();
     void carregarPassageiro();
     void carregarViagens();
+
+    void verificarCidade(string nome);
 };
 
 #endif
