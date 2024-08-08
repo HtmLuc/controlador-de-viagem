@@ -45,6 +45,8 @@ void ControladorDeTransito::cadastrarCidade(string nome)
 
 void ControladorDeTransito::cadastrarTrajeto(string nomeOrigem, string nomeDestino, TipoTransporte tipo, float distancia)
 {
+  
+
 }
 
 void ControladorDeTransito::cadastrarTransporte(string nome, TipoTransporte tipo, int capacidade, float velocidade, float distanciaDescansos, int tempoDescanso, string localAtual)

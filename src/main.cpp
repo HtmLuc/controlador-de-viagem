@@ -17,7 +17,7 @@ int main()
 {
   ControladorDeTransito controle;
   int opcao;
-  string nomeCidade, nomeTransporte, localAtual, nomePassageiro;
+  string nomeCidade, nomeTransporte, localAtual, nomePassageiro, nomeOrigem, nomeDestino;
   TipoTransporte tipo;
   int capacidade, tempoDescanso, entrada;
   float velocidade, distanciaDescanso;
@@ -52,7 +52,16 @@ int main()
         break;
       case 2:
         limparTela();
-        cout << "case 2" << endl;
+        cout << "=-=-=-=-CADASTRAR TRAJETO-=-=-=-=" << endl;
+        cout << "Informe o nome da cidade de origem:" << endl;
+        cout << ">>> ";
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        getline(cin, nomeOrigem);
+        controle.verificarCidade(nomeOrigem);
+        cout << "Informe o nome da cidade de destino:" << endl;
+        cout << ">>> ";
+        getline(cin, nomeDestino);
+        controle.verificarCidade(nomeDestino);
         //cadastrarTrajeto(nomeOrigem, nomeDestino, tipo, distancia);
         break;
       case 3:
