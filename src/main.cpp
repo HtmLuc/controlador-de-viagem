@@ -64,7 +64,6 @@ int main()
         break;
       case 2:
         limparTela();
-
         cout << "=-=-=-=-CADASTRAR TRAJETO-=-=-=-=" << endl;
 
         while(true)
@@ -75,26 +74,42 @@ int main()
 
           if(!controle.verificarCidade(nomeOrigem))
           {
+            cout << "\033[31mERRO: Cidade informada não existe. Tente novamente\033[0m" << endl;
             continue;
           }
+          else
+          {
+            break;
+          }
+        }
 
+        while(true)
+        {
           cout << "Informe o nome da cidade de destino:" << endl;
           cout << ">>> ";
           getline(cin, nomeDestino);
-
-          if(!controle.verificarCidade(nomeDestino))
+          if(nomeDestino == nomeOrigem)
           {
-            cout << "\033[31mERRO: Cidade informada já existe. Tente novamente\033[0m";
+            cout << "\033[31mERRO: O local de destino deve ser diferente do de origem. Tente novamente!\033[0m" << endl;
             continue;
           }
-          break;
+          else if(!controle.verificarCidade(nomeDestino))
+          {
+            cout << "\033[31mERRO: Cidade informada nào existe. Tente novamente\033[0m" << endl;
+            continue;
+          }
+          else
+          {
+            break;
+          }
         }
-        
-        cout << "Informe o tipo do trajero:" << endl;
+        cout << "Informe o tipo do trajero [0 - aquático | 1 - terrestre]:" << endl;
+        cout << ">>> ";
         cin >> entrada;
         tipo = pedirTipo(entrada);
 
-        cout << "Informe a distância do trajeto:";
+        cout << "Informe a distância do trajeto:" << endl;
+        cout << ">>> ";
         cin >> distanciaTrajeto;
 
         controle.cadastrarTrajeto(nomeOrigem, nomeDestino, tipo, distanciaTrajeto);
@@ -169,7 +184,6 @@ int main()
           }
           break;
         }
-
         controle.cadastrarPassageiro(nomePassageiro, localAtual);
         break;
       case 5:
