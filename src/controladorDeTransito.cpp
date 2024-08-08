@@ -38,8 +38,16 @@ void ControladorDeTransito::cadastrarTransporte(string nome, TipoTransporte tipo
   ofstream arquivo("data/transporte.txt", ios::app);
   if(arquivo.is_open())
   {
+    int tipoInt;
+    if(tipo == 0)
+    {
+      tipoInt = 0;
+    }
+    else{
+      tipoInt = 1;
+    }
     arquivo.seekp(0, ios::end);
-    arquivo << nome << "," << tipo << "," << capacidade << "," << velocidade << "," << distanciaDescansos << "," << tempoDescanso << "," << localAtual << endl;
+    arquivo << nome << "," << tipoInt << "," << capacidade << "," << velocidade << "," << distanciaDescansos << "," << tempoDescanso << "," << localAtual << endl;
     cout << "Transporte cadastrado com sucesso!" << endl;
     arquivo.close();
 

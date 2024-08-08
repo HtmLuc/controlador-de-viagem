@@ -11,8 +11,6 @@ void menu(int&);
 
 void limparTela();
 
-TipoTransporte pedirTipo(int);
-
 int main()
 {
   ControladorDeTransito controle;
@@ -28,6 +26,7 @@ int main()
   
   // Puxando informações dos arquivos
   controle.carregarCidades();
+  controle.carregarTransportes();
 
   do
   {
@@ -214,22 +213,4 @@ void limparTela()
   #else
     system("clear");
   #endif
-}
-
-
-TipoTransporte pedirTipo(int entrada)
-{
-  if(entrada == 0)
-  {
-    return TipoTransporte::AQUATICO;
-  }
-  else if(entrada == 1)
-  {
-    return TipoTransporte::TERRESTRE;
-  }
-  else
-  {
-    cout << "AVISO: Não foi informado um tipo de transporte válido, por padrão o tipo é TERRESTRE." << endl;
-    return TipoTransporte::TERRESTRE;
-  }
 }

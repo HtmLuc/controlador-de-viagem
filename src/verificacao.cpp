@@ -1,4 +1,5 @@
 #include "../include/controladorDeTransito.hpp"
+#include "../include/tipoTransporte.hpp"
 #include <string>
 #include <iostream>
 
@@ -26,4 +27,21 @@ bool ControladorDeTransito::verificarPassageiro(string nome, string localAtual)
     }
   }
   return false;
+}
+
+TipoTransporte pedirTipo(int entrada)
+{
+  if(entrada == 0)
+  {
+    return TipoTransporte::AQUATICO;
+  }
+  else if(entrada == 1)
+  {
+    return TipoTransporte::TERRESTRE;
+  }
+  else
+  {
+    cout << "AVISO: Não foi informado um tipo de transporte válido, por padrão o tipo é TERRESTRE." << endl;
+    return TipoTransporte::TERRESTRE;
+  }
 }
