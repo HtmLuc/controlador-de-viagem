@@ -29,14 +29,7 @@ void ControladorDeTransito::cadastrarCidade(string nome)
       arquivo.seekp(0, ios::end);
       arquivo << nome << endl;
       cout << "Cidade cadastrada com sucesso!" << endl;
-<<<<<<< HEAD
-      arquivoEscrita.close();
-      //incrementando nova cidade na lista;
-      Cidade* cidade = new Cidade(nome);
-      listaCidades.push_back(cidade);
-=======
       arquivo.close();
->>>>>>> d397035 (:bug: fix: Utilização dos arquivos e listas nas funções)
     }
     else
     {
@@ -94,19 +87,63 @@ void ControladorDeTransito::cadastrarTransporte(string nome, TipoTransporte tipo
   }
 }
 
-// void ControladorDeTransito::cadastrarPassageiro(string nome, string localAtual)
-// {
-// }
-
-<<<<<<< HEAD
 void ControladorDeTransito::cadastrarPassageiro(string nome, string localAtual)
-{  
+{
+  Cidade* cidadeAtual = nullptr;
+  bool PassageiroExiste = false;
+  
+  // Verificar se o localAtual já foi cadastrado nos arquivos
+  for(auto& cidade : listaCidades)
+  {
+    if(cidade->getNome() == localAtual)
+    {
+      cidadeAtual = cidade;
+      break;
+    }
+  }
+  if(cidadeAtual == nullptr)
+  {
+    cout << "\033[31mERRO: Local Atual não existe. Tente novamente!\033[0m" << endl;
+  }
+  else
+  {
+    // Verificar se o passageiro já está cadastrado;
+    for(auto& passageiro : listaPassageiros)
+    {
+      if(passageiro->getNome() == nome && passageiro->getLocalAtual() == cidadeAtual)
+      {
+        cout << "\033[31mERRO: Passageiro já cadastrado. Tente novamente!\033[0m" << endl;
+        PassageiroExiste = true;
+        break;
+      }
+      
+    }
+    if(!PassageiroExiste)
+    {
+      // Cadastrar novo passageiro NO ARQUIVO
+      ofstream arquivo("data/passageiro.txt", ios::app);
+      if(arquivo.is_open())
+      {
+        arquivo.seekp(0, ios::end);
+        arquivo << nome << "," << localAtual << endl;
+        cout << "Passageiro cadastrado com sucesso!" << endl;
+        arquivo.close();
+
+        // Cadasstrar novo passageiro NA LISTA
+        Passageiro* novoPassageiro = new Passageiro(nome, cidadeAtual);
+        listaPassageiros.push_back(novoPassageiro);
+      }
+      else
+      {
+        cout << "\033[31mERRO: Não foi possível abrir o arquivo para escrita." << endl;
+      }
+    }
+  }
 }
-=======
+
 // void ControladorDeTransito::iniciarViagem(string nomeTransporte, list<string> nomesPassageiros, string nomeOrigem, string nomeDestino)
 // {
 // }
->>>>>>> d397035 (:bug: fix: Utilização dos arquivos e listas nas funções)
 
 // void ControladorDeTransito::avancarHoras(int horas)
 // {

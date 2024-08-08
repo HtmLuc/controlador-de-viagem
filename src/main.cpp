@@ -26,12 +26,8 @@ int main()
   cout << "│Bem-vindo ao sistema de gerenciamento de viagens!│" << endl;
   cout << "└─────────────────────────────────────────────────┘" << endl << endl;
   
-<<<<<<< HEAD
-  // Puxando informações do banco de dados
-=======
   controle.carregarCidades();
 
->>>>>>> d397035 (:bug: fix: Utilização dos arquivos e listas nas funções)
   do
   {
     menu(opcao);
