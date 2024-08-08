@@ -22,7 +22,7 @@ class ControladorDeTransito{
   public:
     void cadastrarCidade(string nome);
     void cadastrarTrajeto(string nomeOrigem, string nomeDestino, TipoTransporte tipo, float distancia);
-    void cadastrarTransporte(string nome, TipoTransporte tipo, int capacidade, float velocidade, float distanciaDescansos, int tempoDescanso, string localAtual);
+    void cadastrarTransporte(string nome, TipoTransporte tipoDeTrajeto, int capacidade, float velocidade, float distanciaDescansos, int tempoDescanso, string localAtual);
     void cadastrarPassageiro(string nome, string localAtual);
 
     void iniciarViagem(string nomeTransporte, list<string> nomesPassageiros, string nomeOrigem, string nomeDestino);
@@ -36,7 +36,8 @@ class ControladorDeTransito{
     void carregarPassageiro();
     void carregarViagens();
 
-    void verificarCidade(string nome);
+    bool verificarCidade(string nome);
+    bool verificarPassageiro(string nome, string localAtual);
 };
 
 #endif

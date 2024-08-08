@@ -11,7 +11,7 @@ void menu(int&);
 
 void limparTela();
 
-TipoTransporte pedirTipoTransporte(int);
+TipoTransporte pedirTipo(int);
 
 int main()
 {
@@ -20,7 +20,7 @@ int main()
   string nomeCidade, nomeTransporte, localAtual, nomePassageiro, nomeOrigem, nomeDestino;
   TipoTransporte tipo;
   int capacidade, tempoDescanso, entrada;
-  float velocidade, distanciaDescanso;
+  float velocidade, distanciaDescanso, distanciaTrajeto;
   
   cout << "┌─────────────────────────────────────────────────┐" << endl;
   cout << "│Bem-vindo ao sistema de gerenciamento de viagens!│" << endl;
@@ -32,7 +32,9 @@ int main()
   do
   {
     menu(opcao);
-    
+
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
     switch(opcao)
     {
       case 0:
@@ -42,27 +44,61 @@ int main()
         limparTela();
 
         cout << "=-=-=-=-=-CADASTRAR CIDADE-=-=-=-=-=" << endl << endl;
-        cout << "Informe o nome da cidade:" << endl;
-        cout << ">>> ";
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        getline(cin, nomeCidade);
-        
+
+        while(true)
+        {
+          cout << "Informe o nome da cidade:" << endl;
+          cout << ">>> ";
+          getline(cin, nomeCidade);
+          if(controle.verificarCidade(nomeCidade))
+          {
+            cout << "\033[31mERRO: Cidade informada já existe. Informe novamente!\033[0m" << endl;
+          }
+          else
+          {
+            break;
+          }
+        } 
+
         controle.cadastrarCidade(nomeCidade);
 
         break;
       case 2:
         limparTela();
+
         cout << "=-=-=-=-CADASTRAR TRAJETO-=-=-=-=" << endl;
-        cout << "Informe o nome da cidade de origem:" << endl;
-        cout << ">>> ";
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        getline(cin, nomeOrigem);
-        controle.verificarCidade(nomeOrigem);
-        cout << "Informe o nome da cidade de destino:" << endl;
-        cout << ">>> ";
-        getline(cin, nomeDestino);
-        controle.verificarCidade(nomeDestino);
-        //cadastrarTrajeto(nomeOrigem, nomeDestino, tipo, distancia);
+
+        while(true)
+        {
+          cout << "Informe o nome da cidade de origem:" << endl;
+          cout << ">>> ";
+          getline(cin, nomeOrigem);
+
+          if(!controle.verificarCidade(nomeOrigem))
+          {
+            continue;
+          }
+
+          cout << "Informe o nome da cidade de destino:" << endl;
+          cout << ">>> ";
+          getline(cin, nomeDestino);
+
+          if(!controle.verificarCidade(nomeDestino))
+          {
+            cout << "\033[31mERRO: Cidade informada já existe. Tente novamente\033[0m";
+            continue;
+          }
+          break;
+        }
+        
+        cout << "Informe o tipo do trajero:" << endl;
+        cin >> entrada;
+        tipo = pedirTipo(entrada);
+
+        cout << "Informe a distância do trajeto:";
+        cin >> distanciaTrajeto;
+
+        controle.cadastrarTrajeto(nomeOrigem, nomeDestino, tipo, distanciaTrajeto);
         break;
       case 3:
         limparTela();
@@ -70,17 +106,25 @@ int main()
         cout << "=-=-=-=-CADASTRAR TRANSPORTE-=-=-=-=" << endl << endl;
         cout << "Informe o nome do transporte:" << endl;
         cout << ">>> ";
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         getline(cin, nomeTransporte);
 
-        cout << "Informe o local atual:" << endl;
-        cout << ">>> ";
-        getline(cin, localAtual);
+        while(true)
+        {
+          cout << "Informe o local atual do transporte:" << endl;
+          cout << ">>> ";
+          getline(cin, localAtual);
+          if(!controle.verificarCidade(localAtual))
+          {
+            cout << "\033[31mERRO: Cidade informado não está cadastrado. Informe outro nome!\033[0m" << endl;
+            continue;
+          }
+          break;
+        }
 
         cout << "Informe o tipo de transporte [0 - aquático | 1 - terrestre]:" << endl;
         cout << ">>> ";
         cin >> entrada;
-        tipo = pedirTipoTransporte(entrada);
+        tipo = pedirTipo(entrada);
 
         cout << "Informe a capacidade do transporte:" << endl;
         cout << ">>> ";
@@ -104,14 +148,28 @@ int main()
         limparTela();
 
         cout << "=-=-=-=-CADASTRAR PASSAGEIRO-=-=-=-=" << endl << endl;
-        cout << "Informe o nome do passageiro:" << endl;
-        cout << ">>> ";
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        getline(cin, nomePassageiro);
 
-        cout << "Informe o local atual do passageiro:" << endl;
-        cout << ">>> ";
-        getline(cin, localAtual);
+        while(true)
+        {
+          cout << "Informe o local atual do passageiro:" << endl;
+          cout << ">>> ";
+          getline(cin, localAtual);
+          if(!controle.verificarCidade(localAtual))
+          {
+            cout << "\033[31mERRO: Cidade informado não está cadastrada. Tente novamente!\033[0m" << endl;
+            continue;
+          }
+
+          cout << "Informe o nome do passageiro:" << endl;
+          cout << ">>> ";
+          getline(cin, nomePassageiro);
+          if(controle.verificarPassageiro(nomePassageiro, localAtual))
+          {
+            cout << "\033[31mERRO: Passageiro informado já está cadastrado nessa localização. Tente novamente!\033[0m" << endl;
+            continue;
+          }
+          break;
+        }
 
         controle.cadastrarPassageiro(nomePassageiro, localAtual);
         break;
@@ -159,7 +217,7 @@ void limparTela()
 }
 
 
-TipoTransporte pedirTipoTransporte(int entrada)
+TipoTransporte pedirTipo(int entrada)
 {
   if(entrada == 0)
   {

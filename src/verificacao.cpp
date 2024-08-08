@@ -1,24 +1,29 @@
-#include "include/controladorDeTransito.hpp"
+#include "../include/controladorDeTransito.hpp"
 #include <string>
 #include <iostream>
 
-void ControladorDeTransito::verificarCidade(string nome){
+// Retorna verdadeiro caso a cidade exista e falso caso contrário
+bool ControladorDeTransito::verificarCidade(string nome){
   string linha;
-  bool cidadeExiste = false;
 
   // Verifica se a cidade já existe
   for(auto& cidade : listaCidades)
   {
     if(cidade->getNome() == nome)
     {
-      cidadeExiste = true;
-      break;    
+      return true;
     }
   }
-
-  if(!cidadeExiste){
-    cout << "\033[31mERRO: Cidade informada não existe. Tente novamente.\033[0m" << endl;
-    return;  
+  return false;
+}
+bool ControladorDeTransito::verificarPassageiro(string nome, string localAtual)
+{
+  for(auto& passageiro : listaPassageiros)
+  {
+    if(passageiro->getNome() == nome && passageiro->getLocalAtual()->getNome() == localAtual)
+    {
+      return true;
+    }
   }
-
+  return false;
 }

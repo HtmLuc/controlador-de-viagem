@@ -7,139 +7,72 @@ using namespace std;
 void ControladorDeTransito::cadastrarCidade(string nome)
 {
   string linha;
-  bool cidadeExiste = false;
 
-  // Verifica se a cidade já existe
-  for(auto& cidade : listaCidades)
+  // Cadastrar a nova cidade NO ARQUIVO
+  ofstream arquivo("data/cidade.txt", ios::app);
+  if(arquivo.is_open())
   {
-    if(cidade->getNome() == nome)
-    {
-      cout << "\033[31mERRO: Cidade informada já está cadastrada. Tente novamente.\033[0m" << endl;
-      cidadeExiste = true;
-      break;
-    }
+    arquivo.seekp(0, ios::end);
+    arquivo << nome << endl;
+    cout << "Cidade cadastrada com sucesso!" << endl;
+    arquivo.close();
+  }
+  else
+{
+    cout << "\033[31mERRO: Não foi possível abir o arquivo para escrita.\033[0m" << endl;
   }
 
-  if(!cidadeExiste)
-  {
-    // Cadastrar a nova cidade NO ARQUIVO
-    ofstream arquivo("data/cidade.txt", ios::app);
-    if(arquivo.is_open())
-    {
-      arquivo.seekp(0, ios::end);
-      arquivo << nome << endl;
-      cout << "Cidade cadastrada com sucesso!" << endl;
-      arquivo.close();
-    }
-    else
-    {
-      cout << "\033[31mERRO: Não foi possível abir o arquivo para escrita.\033[0m" << endl;
-    }
-
-    // Cadastrar a nova cidade NA LISTA
-    Cidade* novaCidade = new Cidade(nome);
-    listaCidades.push_back(novaCidade);
-  }
+  // Cadastrar a nova cidade NA LISTA
+  Cidade* novaCidade = new Cidade(nome);
+  listaCidades.push_back(novaCidade);
 }
 
 
 void ControladorDeTransito::cadastrarTrajeto(string nomeOrigem, string nomeDestino, TipoTransporte tipo, float distancia)
 {
-  
-
 }
 
 void ControladorDeTransito::cadastrarTransporte(string nome, TipoTransporte tipo, int capacidade, float velocidade, float distanciaDescansos, int tempoDescanso, string localAtual)
 {
-  Cidade* cidadeAtual = nullptr;
-  
-  // Verificar se o localAtual já foi cadastrado nos arquivos
-  for(auto& cidade : listaCidades)
+  // Cadastrar novo transporte NO ARQUIVO
+  ofstream arquivo("data/transporte.txt", ios::app);
+  if(arquivo.is_open())
   {
-    if(cidade->getNome() == localAtual)
-    {
-      cidadeAtual = cidade;
-      break;
-    }
-  }
+    arquivo.seekp(0, ios::end);
+    arquivo << nome << "," << tipo << "," << capacidade << "," << velocidade << "," << distanciaDescansos << "," << tempoDescanso << "," << localAtual << endl;
+    cout << "Transporte cadastrado com sucesso!" << endl;
+    arquivo.close();
 
-  if(cidadeAtual == nullptr)
-  {
-    cout << "\033[31mERRO: Local Atual não existe. Tente novamente!\033[0m" << endl;
+    // Cadastrar novo transporte NA LISTA
+    Cidade* cidadeAtual = new Cidade(localAtual);
+    Transporte* novaCidade = new Transporte(nome, tipo, capacidade, velocidade, distanciaDescansos, tempoDescanso, cidadeAtual);
+    listaTransportes.push_back(novaCidade);
   }
   else
-  {
-    // Cadastrar novo transporte NO ARQUIVO
-    ofstream arquivo("data/transporte.txt", ios::app);
-    if(arquivo.is_open())
-    {
-      arquivo.seekp(0, ios::end);
-      arquivo << nome << "," << tipo << "," << capacidade << "," << velocidade << "," << distanciaDescansos << "," << tempoDescanso << "," << localAtual << endl;
-      cout << "Transporte cadastrado com sucesso!" << endl;
-      arquivo.close();
-
-      // Cadastrar novo transporte NA LISTA
-      Transporte* novaCidade = new Transporte(nome, tipo, capacidade, velocidade, distanciaDescansos, tempoDescanso, cidadeAtual);
-      listaTransportes.push_back(novaCidade);
-    }
-    else
-    {
-      cout << "\033[31mERRO: Não foi possível abrir o arquivo para escrita." << endl;
-    }
+{
+    cout << "\033[31mERRO: Não foi possível abrir o arquivo para escrita." << endl;
   }
 }
 
 void ControladorDeTransito::cadastrarPassageiro(string nome, string localAtual)
 {
-  Cidade* cidadeAtual = nullptr;
-  bool PassageiroExiste = false;
-  
-  // Verificar se o localAtual já foi cadastrado nos arquivos
-  for(auto& cidade : listaCidades)
+  // Cadastrar novo passageiro NO ARQUIVO
+  ofstream arquivo("data/passageiro.txt", ios::app);
+  if(arquivo.is_open())
   {
-    if(cidade->getNome() == localAtual)
-    {
-      cidadeAtual = cidade;
-      break;
-    }
-  }
-  if(cidadeAtual == nullptr)
-  {
-    cout << "\033[31mERRO: Local Atual não existe. Tente novamente!\033[0m" << endl;
+    arquivo.seekp(0, ios::end);
+    arquivo << nome << "," << localAtual << endl;
+    cout << "Passageiro cadastrado com sucesso!" << endl;
+    arquivo.close();
+
+    // Cadasstrar novo passageiro NA LISTA
+    Cidade* cidadeAtual = new Cidade(localAtual);
+    Passageiro* novoPassageiro = new Passageiro(nome, cidadeAtual);
+    listaPassageiros.push_back(novoPassageiro);
   }
   else
-  {
-    // Verificar se o passageiro já está cadastrado;
-    for(auto& passageiro : listaPassageiros)
-    {
-      if(passageiro->getNome() == nome && passageiro->getLocalAtual() == cidadeAtual)
-      {
-        cout << "\033[31mERRO: Passageiro já cadastrado. Tente novamente!\033[0m" << endl;
-        PassageiroExiste = true;
-        break;
-      }
-      
-    }
-    if(!PassageiroExiste)
-    {
-      // Cadastrar novo passageiro NO ARQUIVO
-      ofstream arquivo("data/passageiro.txt", ios::app);
-      if(arquivo.is_open())
-      {
-        arquivo.seekp(0, ios::end);
-        arquivo << nome << "," << localAtual << endl;
-        cout << "Passageiro cadastrado com sucesso!" << endl;
-        arquivo.close();
-
-        // Cadasstrar novo passageiro NA LISTA
-        Passageiro* novoPassageiro = new Passageiro(nome, cidadeAtual);
-        listaPassageiros.push_back(novoPassageiro);
-      }
-      else
-      {
-        cout << "\033[31mERRO: Não foi possível abrir o arquivo para escrita." << endl;
-      }
-    }
+{
+    cout << "\033[31mERRO: Não foi possível abrir o arquivo para escrita." << endl;
   }
 }
 
