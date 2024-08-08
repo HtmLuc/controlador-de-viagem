@@ -7,4 +7,6 @@ enum TipoTransporte
   TERRESTRE
 };
 
+TipoTransporte pedirTipo(int);
+
 #endif
