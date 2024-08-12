@@ -1,7 +1,6 @@
 #ifndef TRAJETO_HPP
 #define TRAJETO_HPP
 
-#include "tipoTransporte.hpp"
 #include "cidade.hpp"
 
 class Trajeto
@@ -9,13 +8,13 @@ class Trajeto
   private:
     Cidade* origem;
     Cidade* destino;
-    TipoTransporte tipo;
+    int tipo;
     float distancia;
   public:
-    Trajeto(Cidade* origem, Cidade* destino, TipoTransporte tipo, float distancia);
+    Trajeto(Cidade* origem, Cidade* destino, int tipo, float distancia);
     Cidade* getOrigem();
     Cidade* getDestino();
-    TipoTransporte getTipo();
+    int getTipo();
     float getDistancia();
 };
 

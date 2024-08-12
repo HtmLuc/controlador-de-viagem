@@ -1,7 +1,6 @@
-#include "../include/controladorDeTransito.hpp"
-#include "../include/tipoTransporte.hpp"
 #include <string>
 #include <iostream>
+#include "../include/controladorDeTransito.hpp"
 
 // Retorna verdadeiro caso a cidade exista e falso caso contrário
 bool ControladorDeTransito::verificarCidade(string nome){
@@ -29,19 +28,14 @@ bool ControladorDeTransito::verificarPassageiro(string nome, string localAtual)
   return false;
 }
 
-TipoTransporte pedirTipo(int entrada)
+bool ControladorDeTransito::verificarTransporte(string nomeTransporte, int tipo, int capacidade, float velocidade, float distanciaDescansos, int tempoDescanso, string localAtual)
 {
-  if(entrada == 0)
+  for(auto& transporte : listaTransportes)
   {
-    return TipoTransporte::AQUATICO;
+    if(transporte->getNome() == nomeTransporte && transporte->getTipo() == tipo && transporte->getCapacidade() == capacidade && transporte->getVelocidade() == velocidade && transporte->getDistanciaDescansos() == distanciaDescansos && transporte->getTempoDescanso() == tempoDescanso && transporte->getLocalAtual()->getNome() == localAtual)
+    {
+      return true;
+    }
   }
-  else if(entrada == 1)
-  {
-    return TipoTransporte::TERRESTRE;
-  }
-  else
-  {
-    cout << "AVISO: Não foi informado um tipo de transporte válido, por padrão o tipo é TERRESTRE." << endl;
-    return TipoTransporte::TERRESTRE;
-  }
+  return false;
 }

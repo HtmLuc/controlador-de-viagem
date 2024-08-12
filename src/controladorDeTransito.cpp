@@ -6,8 +6,6 @@ using namespace std;
 
 void ControladorDeTransito::cadastrarCidade(string nome)
 {
-  string linha;
-
   // Cadastrar a nova cidade NO ARQUIVO
   ofstream arquivo("data/cidade.txt", ios::app);
   if(arquivo.is_open())
@@ -28,10 +26,8 @@ void ControladorDeTransito::cadastrarCidade(string nome)
 }
 
 
-void ControladorDeTransito::cadastrarTrajeto(string nomeOrigem, string nomeDestino, TipoTransporte tipo, float distancia)
+void ControladorDeTransito::cadastrarTrajeto(string nomeOrigem, string nomeDestino, int tipo, float distancia)
 {
-  string linha;
-  // VERIFICAR SE JÁ EXISTE O TRAJETO
   ofstream arquivo("data/trajeto.txt", ios::app);
   if(arquivo.is_open())
   {
@@ -47,21 +43,12 @@ void ControladorDeTransito::cadastrarTrajeto(string nomeOrigem, string nomeDesti
   listaTrajetos.push_back(novoTrajeto);
 }
 
-void ControladorDeTransito::cadastrarTransporte(string nome, TipoTransporte tipo, int capacidade, float velocidade, float distanciaDescansos, int tempoDescanso, string localAtual)
+void ControladorDeTransito::cadastrarTransporte(string nome, int tipo, int capacidade, float velocidade, float distanciaDescansos, int tempoDescanso, string localAtual)
 {
-  // VERIFICAR SE O TRANSPORTE EXISTE
-
+  
   ofstream arquivo("data/transporte.txt", ios::app);
   if(arquivo.is_open())
   {
-    int tipoInt;
-    if(tipo == 0)
-    {
-      tipoInt = 0;
-    }
-    else{
-      tipoInt = 1;
-    }
     arquivo.seekp(0, ios::end);
     arquivo << nome << "," << tipo << "," << capacidade << "," << velocidade << "," << distanciaDescansos << "," << tempoDescanso << "," << localAtual << endl;
     cout << "Transporte cadastrado com sucesso!" << endl;

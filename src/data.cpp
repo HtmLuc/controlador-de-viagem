@@ -1,8 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <string>
 #include "../include/controladorDeTransito.hpp"
-#include "../include/tipoTransporte.hpp"
 
 
 using namespace std;
@@ -26,20 +26,17 @@ void ControladorDeTransito::carregarCidades()
 
 void ControladorDeTransito::carregarTransportes()
 {
-  ifstream arquivo("data/trajeto.txt");
+  ifstream arquivo("data/transporte.txt");
   string linha;
   if(arquivo.is_open())
   {
     while(getline(arquivo, linha))
     {
-      if(!linha.empty())
-      {
-        stringstream xx(linha);
+        istringstream xx(linha);
         string nome, localAtualS;
-        TipoTransporte tipoEnum;
         int tipo, capacidade, distanciaDescansos, tempoDescanso;
         float velocidade;
-        Cidade* localAtual;
+        Cidade* localAtual = nullptr;
 
         getline(xx, nome, ',');
         xx >> tipo;
@@ -53,21 +50,14 @@ void ControladorDeTransito::carregarTransportes()
         xx >> tempoDescanso;
         xx.ignore();
         getline(xx, localAtualS);
-
-        tipoEnum = pedirTipo(tipo);
         localAtual = new Cidade(localAtualS);
-
-        Transporte* trajetoArquivo = new Transporte(nome, tipoEnum, capacidade, velocidade, distanciaDescansos, tempoDescanso, localAtual);
+        
+        Transporte* trajetoArquivo = new Transporte(nome, tipo, capacidade, velocidade, distanciaDescansos, tempoDescanso, localAtual);
 
         listaTransportes.push_back(trajetoArquivo);
-      }
     }
   }
- }
-
-//void ControladorDeTransito::carregarTransportes()
-//{
-//}
+}
 
 void ControladorDeTransito::carregarPassageiro()
 {

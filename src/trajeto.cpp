@@ -1,6 +1,6 @@
 #include "../include/trajeto.hpp"
 
-Trajeto::Trajeto(Cidade* origem, Cidade* destino, TipoTransporte tipo, float distancia)
+Trajeto::Trajeto(Cidade* origem, Cidade* destino, int tipo, float distancia)
 {
   this->origem = origem;
   this->destino = destino;
@@ -18,7 +18,7 @@ Cidade* Trajeto::getDestino()
   return destino;
 }
 
-TipoTransporte Trajeto::getTipo()
+int Trajeto::getTipo()
 {
   return tipo;
 }

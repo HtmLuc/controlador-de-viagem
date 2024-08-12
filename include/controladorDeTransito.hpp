@@ -3,7 +3,6 @@
 
 #include <string>
 #include <list>
-#include "tipoTransporte.hpp"
 #include "cidade.hpp"
 #include "passageiro.hpp"
 #include "trajeto.hpp"
@@ -21,8 +20,8 @@ class ControladorDeTransito{
     list<Viagem*>listaViagens;
   public:
     void cadastrarCidade(string nome);
-    void cadastrarTrajeto(string nomeOrigem, string nomeDestino, TipoTransporte tipo, float distancia);
-    void cadastrarTransporte(string nome, TipoTransporte tipoDeTrajeto, int capacidade, float velocidade, float distanciaDescansos, int tempoDescanso, string localAtual);
+    void cadastrarTrajeto(string nomeOrigem, string nomeDestino, int tipo, float distancia);
+    void cadastrarTransporte(string nome, int tipoDeTrajeto, int capacidade, float velocidade, float distanciaDescansos, int tempoDescanso, string localAtual);
     void cadastrarPassageiro(string nome, string localAtual);
 
     void iniciarViagem(string nomeTransporte, list<string> nomesPassageiros, string nomeOrigem, string nomeDestino);
@@ -38,6 +37,7 @@ class ControladorDeTransito{
 
     bool verificarCidade(string nome);
     bool verificarPassageiro(string nome, string localAtual);
+    bool verificarTransporte(string nome, int tipo, int capacidade, float velocidade, float distanciaDescansos, int tempoDescanso, string localAtual);
 };
 
 #endif

@@ -2,7 +2,6 @@
 #define TRANSPORTE_HPP
 
 #include <string>
-#include "tipoTransporte.hpp"
 #include "cidade.hpp"
 
 using namespace std;
@@ -11,7 +10,7 @@ class Transporte
 {
   private:
     string nome;
-    TipoTransporte tipo;
+    int tipo;
     int capacidade;
     float velocidade;
     int distanciaDescansos;
@@ -19,9 +18,9 @@ class Transporte
     int tempoDescansoAtual;
     Cidade* localAtual;
   public:
-    Transporte(string nome, TipoTransporte tipo, int capacidade, float velocidade, int distanciaDescansos, int tempoDescanso, Cidade* localAtual);
+    Transporte(string nome, int tipo, int capacidade, float velocidade, int distanciaDescansos, int tempoDescanso, Cidade* localAtual);
     string getNome();
-    TipoTransporte getTipo();
+    int getTipo();
     int getCapacidade();
     float getVelocidade();
     int getDistanciaDescansos();

@@ -3,7 +3,6 @@
 #include <limits>
 #include <cstdlib>
 #include "../include/controladorDeTransito.hpp"
-#include "../include/tipoTransporte.hpp"
 
 using namespace std;
 
@@ -16,8 +15,7 @@ int main()
   ControladorDeTransito controle;
   int opcao;
   string nomeCidade, nomeTransporte, localAtual, nomePassageiro, nomeOrigem, nomeDestino;
-  TipoTransporte tipo;
-  int capacidade, tempoDescanso, entrada;
+  int capacidade, tempoDescanso, entrada, tipo;
   float velocidade, distanciaDescanso, distanciaTrajeto;
   
   cout << "┌─────────────────────────────────────────────────┐" << endl;
@@ -32,8 +30,6 @@ int main()
   {
     menu(opcao);
 
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
     switch(opcao)
     {
       case 0:
@@ -44,6 +40,8 @@ int main()
 
         cout << "=-=-=-=-=-CADASTRAR CIDADE-=-=-=-=-=" << endl << endl;
 
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
         while(true)
         {
           cout << "Informe o nome da cidade:" << endl;
@@ -51,7 +49,7 @@ int main()
           getline(cin, nomeCidade);
           if(controle.verificarCidade(nomeCidade))
           {
-            cout << "\033[31mERRO: Cidade informada já existe. Informe novamente!\033[0m" << endl;
+            cout << "\033[31mERRO: Cidade informada já existe. Tente novamente!\033[0m" << endl;
           }
           else
           {
@@ -65,6 +63,8 @@ int main()
       case 2:
         limparTela();
         cout << "=-=-=-=-CADASTRAR TRAJETO-=-=-=-=" << endl;
+
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         while(true)
         {
@@ -95,7 +95,7 @@ int main()
           }
           else if(!controle.verificarCidade(nomeDestino))
           {
-            cout << "\033[31mERRO: Cidade informada nào existe. Tente novamente\033[0m" << endl;
+            cout << "\033[31mERRO: Cidade informada não existe. Tente novamente\033[0m" << endl;
             continue;
           }
           else
@@ -105,8 +105,7 @@ int main()
         }
         cout << "Informe o tipo do trajero [0 - aquático | 1 - terrestre]:" << endl;
         cout << ">>> ";
-        cin >> entrada;
-        tipo = pedirTipo(entrada);
+        cin >> tipo;
 
         cout << "Informe a distância do trajeto:" << endl;
         cout << ">>> ";
@@ -117,44 +116,58 @@ int main()
       case 3:
         limparTela();
 
-        cout << "=-=-=-=-CADASTRAR TRANSPORTE-=-=-=-=" << endl << endl;
-        cout << "Informe o nome do transporte:" << endl;
-        cout << ">>> ";
-        getline(cin, nomeTransporte);
-
         while(true)
         {
-          cout << "Informe o local atual do transporte:" << endl;
+          cin.ignore(numeric_limits<streamsize>::max(), '\n');
+         
+          cout << "=-=-=-=-CADASTRAR TRANSPORTE-=-=-=-=" << endl << endl;
+          cout << "Informe o nome do transporte:" << endl;
           cout << ">>> ";
-          getline(cin, localAtual);
-          if(!controle.verificarCidade(localAtual))
+          getline(cin, nomeTransporte);
+
+          while(true)
           {
-            cout << "\033[31mERRO: Cidade informado não está cadastrado. Informe outro nome!\033[0m" << endl;
+            cout << "Informe o local atual do transporte:" << endl;
+            cout << ">>> ";
+            getline(cin, localAtual);
+            if(!controle.verificarCidade(localAtual))
+            {
+              cout << "\033[31mERRO: Cidade informado não está cadastrado. Informe outro nome!\033[0m" << endl;
+              continue;
+            }
+            break;
+          }
+
+          cout << "Informe o tipo de transporte [0 - aquático | 1 - terrestre]:" << endl;
+          cout << ">>> ";
+          cin >> tipo;
+
+          cout << "Informe a capacidade do transporte:" << endl;
+          cout << ">>> ";
+          cin >> capacidade;
+
+          cout << "Informe a velocidade do transporte (km/h):" << endl;
+          cout << ">>> ";
+          cin >> velocidade;
+
+          cout << "Informe a distancia entre os descansos (km):" << endl;
+          cout << ">>> ";
+          cin >> distanciaDescanso;
+
+          cout << "Informe o tempo de descanso (horas):" << endl;
+          cout << ">>> ";
+          cin >> tempoDescanso;
+
+          if(controle.verificarTransporte(nomeTransporte, tipo, capacidade, velocidade, distanciaDescanso, tempoDescanso, localAtual))
+          {
+            cout << "\033[31mERRO: Transporte informado já existe. Tente novamente!\033[0m" << endl;
             continue;
           }
-          break;
+          else
+          {
+            break;
+          }
         }
-
-        cout << "Informe o tipo de transporte [0 - aquático | 1 - terrestre]:" << endl;
-        cout << ">>> ";
-        cin >> entrada;
-        tipo = pedirTipo(entrada);
-
-        cout << "Informe a capacidade do transporte:" << endl;
-        cout << ">>> ";
-        cin >> capacidade;
-
-        cout << "Informe a velocidade do transporte (km/h):" << endl;
-        cout << ">>> ";
-        cin >> velocidade;
-
-        cout << "Informe a distancia entre os descansos (km):" << endl;
-        cout << ">>> ";
-        cin >> distanciaDescanso;
-
-        cout << "Informe o tempo de descanso (horas):" << endl;
-        cout << ">>> ";
-        cin >> tempoDescanso;
 
         controle.cadastrarTransporte(nomeTransporte, tipo, capacidade, velocidade, distanciaDescanso, tempoDescanso, localAtual);
         break;
@@ -162,6 +175,8 @@ int main()
         limparTela();
 
         cout << "=-=-=-=-CADASTRAR PASSAGEIRO-=-=-=-=" << endl << endl;
+
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         while(true)
         {
@@ -187,14 +202,17 @@ int main()
         controle.cadastrarPassageiro(nomePassageiro, localAtual);
         break;
       case 5:
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "case 5" << endl;
         //iniciarViagem(nomeTransporte, nomesPassageiros, nomeOrigem, nomeDestino);
         break;
       case 6:
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "case 6" << endl;
         //avancarHoras(horas);
         break;
       case 7:
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "case 7" << endl;
         //relatarEstado();
         break;
