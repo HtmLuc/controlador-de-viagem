@@ -59,10 +59,56 @@ void ControladorDeTransito::carregarTransportes()
   }
 }
 
-void ControladorDeTransito::carregarPassageiro()
+void ControladorDeTransito::carregarPassageiros()
 {
+  ifstream arquivo("data/passageiro.txt");
+  string linha;
+  if(arquivo.is_open())
+  {
+    while(getline(arquivo, linha)){
+      istringstream xx(linha);
+      string nome, localAtualS;
+      
+      getline(xx, nome, ',');
+      getline(xx, localAtualS, ',');
+
+      Cidade* localAtual = nullptr;
+      localAtual = new Cidade(localAtualS);
+
+      Passageiro* PassageiroArquivo = new Passageiro(nome, localAtual);
+
+      listaPassageiros.push_back(PassageiroArquivo);
+    }
+  }
 }
 
-void ControladorDeTransito::carregarViagens()
+void ControladorDeTransito::carregarTrajetos()
 {
+  ifstream arquivo("data/trajeto.txt");
+  string linha;
+  if(arquivo.is_open())
+  {
+    while(getline(arquivo, linha)){
+      istringstream xx(linha);
+      string origemS, destinoS;
+      int tipo;
+      float distancia;
+
+      getline(xx, origemS, ',');
+      getline(xx, destinoS, ',');
+      xx >> tipo;
+      xx.ignore();
+      xx >> distancia;
+
+      Cidade* destino = nullptr;
+      Cidade* origem = nullptr;
+
+      origem = new Cidade(origemS);
+      destino = new Cidade(destinoS);
+
+      Trajeto* TrajetoArquivo = new Trajeto(origem, destino, tipo, distancia);
+
+      listaTrajetos.push_back(TrajetoArquivo);
+    }
+  }
 }
