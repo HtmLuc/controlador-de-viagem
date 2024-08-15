@@ -39,3 +39,14 @@ bool ControladorDeTransito::verificarTransporte(string nomeTransporte, int tipo,
   }
   return false;
 }
+
+bool ControladorDeTransito::VerificarTrajeto(string origem, string destino, int tipo, float distancia)
+{
+  for(auto& trajeto : listaTrajetos){
+    if(trajeto->getOrigem()->getNome() == origem && trajeto->getDestino()->getNome() == destino && trajeto->getTipo() == tipo && trajeto->getDistancia() == distancia)
+    {
+      return true;
+    }
+  }
+  return false;
+}

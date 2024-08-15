@@ -32,12 +32,13 @@ class ControladorDeTransito{
     void carregarCidades();
     void carregarTrajetos();
     void carregarTransportes();
-    void carregarPassageiro();
+    void carregarPassageiros();
     void carregarViagens();
 
     bool verificarCidade(string nome);
     bool verificarPassageiro(string nome, string localAtual);
     bool verificarTransporte(string nome, int tipo, int capacidade, float velocidade, float distanciaDescansos, int tempoDescanso, string localAtual);
+    bool VerificarTrajeto(string origem, string destino, int tipo, float distancia);
 };
 
 #endif
