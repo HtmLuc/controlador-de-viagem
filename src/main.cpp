@@ -55,7 +55,7 @@ int main()
       {
         controle.cadastrarCidade(nomeCidade);
       }
-
+        
       break;
     case 2:
       limparTela();
@@ -118,7 +118,7 @@ int main()
       getline(cin, localAtual);
       if (!controle.verificarCidade(localAtual))
       {
-        cout << "\033[31mERRO: Cidade informada não está cadastrado. Tente novamente!\033[0m" << endl;
+        cout << "\033[31mERRO: Cidade informada não está cadastrada. Tente novamente!\033[0m" << endl;
         break;
       }
 
@@ -134,7 +134,7 @@ int main()
       cout << ">>> ";
       cin >> velocidade;
 
-      cout << "Informe a distancia entre os descansos (km):" << endl;
+      cout << "Informe a distância entre os descansos (km):" << endl;
       cout << ">>> ";
       cin >> distanciaDescanso;
 
