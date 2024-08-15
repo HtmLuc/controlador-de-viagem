@@ -103,7 +103,7 @@ int main()
             break;
           }
         }
-        cout << "Informe o tipo do trajero [0 - aquático | 1 - terrestre]:" << endl;
+        cout << "Informe o tipo do trajeto [0 - aquático | 1 - terrestre]:" << endl;
         cout << ">>> ";
         cin >> tipo;
 
