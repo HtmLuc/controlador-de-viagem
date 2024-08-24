@@ -78,7 +78,7 @@ void ControladorDeTransito::cadastrarPassageiro(string nome, string localAtual)
     cout << "Passageiro cadastrado com sucesso!" << endl;
     arquivo.close();
 
-    // Cadasstrar novo passageiro NA LISTA
+    // Cadastrar novo passageiro NA LISTA
     Cidade* cidadeAtual = new Cidade(localAtual);
     Passageiro* novoPassageiro = new Passageiro(nome, cidadeAtual, false);
     listaPassageiros.push_back(novoPassageiro);
@@ -122,6 +122,39 @@ void ControladorDeTransito::avancarHoras(int horas)
 
 void ControladorDeTransito::relatarEstado()
 {
+  //Relatar onde está cada pessoa
+  cout << "Relatório do local de cada passageiro" << endl;
+  for(const auto& passageiro: listaPassageiros){
+    if(passageiro->getEmTransito()){
+      cout << passageiro->getNome() << " está em trânsito." << endl;
+      //acrescentar os outros dados
+    }
+    else{
+      cout << passageiro->getNome() << " está em " << passageiro->getLocalAtual()->getNome() << endl;
+    }
+  }
+
+  //Relatar onde está cada transporte
+  cout << "Relatório do local de cada transporte" << endl;
+  for (const auto& transporte : listaTransportes) {
+    if (transporte->getEmTransito()) {
+      cout << transporte->getNome() << " está em trânsito." << endl;
+    }
+    else{
+      cout << transporte->getNome() << " está em " << transporte->getLocalAtual()->getNome() << endl;
+    }
+  }
+
+  //Relatar todas as viagens em andamento
+  cout << "Relatório de todas as viagens em andamento" << endl;
+  for (const auto& viagem : listaViagens) {
+        viagem->relatarEstado();
+  }
+
+  //Relatar todas as cidade mais visitadas
+  cout << "Relatório das cidades mais visitadas" << endl;
+  //A se fazer
+
 }
 
 void ControladorDeTransito::IniciarTransporte(string nomeTransporte, string localOrigem, int tipo)
