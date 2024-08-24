@@ -3,8 +3,6 @@
 #include <string>
 #include <limits>
 #include <cstdlib>
-#include <system_error>
-#include <vector>
 #include "../include/controladorDeTransito.hpp"
 
 using namespace std;

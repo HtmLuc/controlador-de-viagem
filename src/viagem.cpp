@@ -32,12 +32,40 @@ void Viagem::iniciarViagem()
 
 void Viagem::avancarHoras(int horas)
 {
-  //TO-DO;
+  float distanciaPercorrida = transporte->getVelocidade() * horas;
+  distanciaRestante -= distanciaPercorrida;
+
+  tempoDecorrido += horas;
+
+  if(distanciaRestante <= 0)
+  {
+    transporte->setEmTransito(false);
+    for(auto passageiro : listaPassageiros)
+    {
+      passageiro->setEmTransito(false);
+      passageiro->setLocalAtual(destino);
+    }
+    transporte->setLocalAtual(destino);
+    cout << "Viagem concluída!" << endl;
+  }
+  else
+  {
+    cout << "Cidade em progresso. Distancia restante: " << distanciaRestante << "km." << endl;
+  }
 }
 
 void Viagem::relatarEstado()
 {
-  //TO-DO;
+  if(isEmAndamento())
+  {
+    cout << "Viagem de " << origem->getNome() << " para " << destino->getNome() << " está em andamento." << endl;
+    cout << "Distancia restante: " << distanciaRestante << "km." << endl;
+    cout << "Tempo decorrido: " << tempoDecorrido << "km." << endl;
+  }
+  else
+  { 
+    cout << "Viagem já chegou ao destino: " << destino->getNome() << endl;
+  }
 }
 
 bool Viagem::isEmAndamento()

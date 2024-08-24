@@ -16,6 +16,8 @@ private:
   Cidade* destino;
   Viagem* proxima;
   int horasEmTransito;
+  float distanciaRestante;
+  int tempoDecorrido;
   bool emAndamento;
 public:
   Viagem(Transporte* transporte, list<Passageiro*>passageiros, Cidade* origem, Cidade* destino);
