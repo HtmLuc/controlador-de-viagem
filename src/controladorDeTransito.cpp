@@ -93,8 +93,22 @@ vector<string> ControladorDeTransito::calcularMelhorTrajeto(string origem, strin
   return grafoCidades.caminhoCurto(origem, destino);
 }
 
-void ControladorDeTransito::iniciarViagem(string nomeTransporte, list<string> nomesPassageiros, string nomeOrigem, string nomeDestino)
+void ControladorDeTransito::iniciarViagem(string nomeTransporte, string nomeOrigem, string nomeDestino)
 {
+  vector<string> melhorCaminho = calcularMelhorTrajeto(nomeOrigem, nomeDestino);
+
+  if (melhorCaminho.empty()) 
+  { 
+    cout << "\033[31mERRO: Não foi encontrado um trajeto entre as cidades informadas.\033[0m" << endl;
+    return;
+  }
+
+  cout << "Melhor trajeto de " << nomeOrigem << " para " << nomeDestino << ":" << endl;
+  for (auto& cidade : melhorCaminho)
+  {
+    cout << cidade << " -> ";
+  }
+  cout << "CHEGADA" << endl;
 }
 
 void ControladorDeTransito::avancarHoras(int horas)

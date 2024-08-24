@@ -40,6 +40,18 @@ bool ControladorDeTransito::verificarTransporte(string nomeTransporte, int tipo,
   return false;
 }
 
+bool ControladorDeTransito::verificarTransporteNome(string nome)
+{
+  for(auto transporte : listaTransportes)
+  {
+    if(transporte->getNome() == nome)
+    {
+      return true;
+    }
+  }
+  return false;
+}
+
 bool ControladorDeTransito::VerificarTrajeto(string origem, string destino, int tipo, float distancia)
 {
   for(auto& trajeto : listaTrajetos){

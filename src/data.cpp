@@ -100,11 +100,8 @@ void ControladorDeTransito::carregarTrajetos()
       xx.ignore();
       xx >> distancia;
 
-      Cidade* destino = nullptr;
-      Cidade* origem = nullptr;
-
-      origem = new Cidade(origemS);
-      destino = new Cidade(destinoS);
+      Cidade* destino = new Cidade(origemS);
+      Cidade* origem = new Cidade(destinoS);
 
       Trajeto* TrajetoArquivo = new Trajeto(origem, destino, tipo, distancia);
 
