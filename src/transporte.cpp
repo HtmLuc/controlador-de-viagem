@@ -1,6 +1,6 @@
 #include "../include/transporte.hpp"
 
-Transporte::Transporte(string nome, int tipo, int capacidade, float velocidade, int distanciaDescansos, int tempoDescanso, Cidade* localAtual){
+Transporte::Transporte(string nome, int tipo, int capacidade, float velocidade, int distanciaDescansos, int tempoDescanso, Cidade* localAtual, bool emTransito){
   this->nome = nome;
   this->tipo = tipo;
   this->capacidade = capacidade;
@@ -8,6 +8,7 @@ Transporte::Transporte(string nome, int tipo, int capacidade, float velocidade, 
   this->distanciaDescansos = distanciaDescansos;
   this->tempoDescanso = tempoDescanso;
   this->localAtual = localAtual;
+  this->emTransito = emTransito;
 }
 
 string Transporte::getNome()

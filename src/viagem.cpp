@@ -20,7 +20,7 @@ void Viagem::iniciarViagem()
     return;
   }
   transporte->setEmTransito(true);
-  for(auto passageiro : listaPassageiros)
+  for(auto& passageiro : listaPassageiros)
   {
     passageiro->setEmTransito(true);
   }
@@ -40,7 +40,7 @@ void Viagem::avancarHoras(int horas)
   if(distanciaRestante <= 0)
   {
     transporte->setEmTransito(false);
-    for(auto passageiro : listaPassageiros)
+    for(auto& passageiro : listaPassageiros)
     {
       passageiro->setEmTransito(false);
       passageiro->setLocalAtual(destino);

@@ -52,13 +52,13 @@ void ControladorDeTransito::cadastrarTransporte(string nome, int tipo, int capac
   if(arquivo.is_open())
   {
     arquivo.seekp(0, ios::end);
-    arquivo << nome << "," << tipo << "," << capacidade << "," << velocidade << "," << distanciaDescansos << "," << tempoDescanso << "," << localAtual << endl;
+    arquivo << nome << "," << tipo << "," << capacidade << "," << velocidade << "," << distanciaDescansos << "," << tempoDescanso << "," << localAtual << ",false" << endl;
     cout << "Transporte cadastrado com sucesso!" << endl;
     arquivo.close();
 
     // Cadastrar novo transporte NA LISTA
     Cidade* cidadeAtual = new Cidade(localAtual);
-    Transporte* novaCidade = new Transporte(nome, tipo, capacidade, velocidade, distanciaDescansos, tempoDescanso, cidadeAtual);
+    Transporte* novaCidade = new Transporte(nome, tipo, capacidade, velocidade, distanciaDescansos, tempoDescanso, cidadeAtual, false);
     listaTransportes.push_back(novaCidade);
   }
   else
@@ -74,13 +74,13 @@ void ControladorDeTransito::cadastrarPassageiro(string nome, string localAtual)
   if(arquivo.is_open())
   {
     arquivo.seekp(0, ios::end);
-    arquivo << nome << "," << localAtual << endl;
+    arquivo << nome << "," << localAtual << ",false" << endl;
     cout << "Passageiro cadastrado com sucesso!" << endl;
     arquivo.close();
 
     // Cadastrar novo passageiro NA LISTA
     Cidade* cidadeAtual = new Cidade(localAtual);
-    Passageiro* novoPassageiro = new Passageiro(nome, cidadeAtual);
+    Passageiro* novoPassageiro = new Passageiro(nome, cidadeAtual, false);
     listaPassageiros.push_back(novoPassageiro);
   }
   else
@@ -113,6 +113,11 @@ void ControladorDeTransito::iniciarViagem(string nomeTransporte, string nomeOrig
 
 void ControladorDeTransito::avancarHoras(int horas)
 {
+  for(auto& viagem : listaViagens)
+  {
+    viagem->avancarHoras(horas);
+  }
+
 }
 
 void ControladorDeTransito::relatarEstado()

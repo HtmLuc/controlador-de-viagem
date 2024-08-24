@@ -13,7 +13,7 @@ class Passageiro
     Cidade* localAtual;
     bool emTransito;
   public:
-    Passageiro(string nome, Cidade* localAtual);
+    Passageiro(string nome, Cidade* localAtual, bool emTransito);
     string getNome();
     Cidade* getLocalAtual();
 
