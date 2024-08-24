@@ -41,6 +41,8 @@ void ControladorDeTransito::cadastrarTrajeto(string nomeOrigem, string nomeDesti
   Cidade* novaCidadeDestino = new Cidade(nomeDestino);
   Trajeto* novoTrajeto = new Trajeto(novaCidadeOrigem, novaCidadeDestino, tipo, distancia);
   listaTrajetos.push_back(novoTrajeto);
+
+  grafoCidades.adicionarTrajeto(nomeOrigem, nomeDestino, distancia);
 }
 
 void ControladorDeTransito::cadastrarTransporte(string nome, int tipo, int capacidade, float velocidade, float distanciaDescansos, int tempoDescanso, string localAtual)
@@ -85,6 +87,10 @@ void ControladorDeTransito::cadastrarPassageiro(string nome, string localAtual)
 {
     cout << "\033[31mERRO: Não foi possível abrir o arquivo para escrita." << endl;
   }
+}
+
+vector<string> ControladorDeTransito::calcularMelhorTrajeto(string origem, string destino) {
+  return grafoCidades.caminhoCurto(origem, destino);
 }
 
 void ControladorDeTransito::iniciarViagem(string nomeTransporte, list<string> nomesPassageiros, string nomeOrigem, string nomeDestino)
