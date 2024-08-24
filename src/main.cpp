@@ -99,10 +99,7 @@ int main()
           cout << "\033[31mERRO: Trajeto informado já existe. Tente novamente\033[0m" << endl;
           break;
         }
-        else
-      {
-          controle.cadastrarTrajeto(nomeOrigem, nomeDestino, tipo, distanciaTrajeto);
-        }
+        controle.cadastrarTrajeto(nomeOrigem, nomeDestino, tipo, distanciaTrajeto);
 
         break;
       case 3:
@@ -161,11 +158,6 @@ int main()
         cout << "Informe o nome do passageiro:" << endl;
         cout << ">>> ";
         getline(cin, nomePassageiro);
-        if (controle.verificarPassageiro(nomePassageiro, localAtual))
-        {
-          cout << "\033[31mERRO: Passageiro informado já está cadastrado nessa localização. Tente novamente!\033[0m" << endl;
-          break;
-        }
 
         cout << "Informe o local atual do passageiro:" << endl;
         cout << ">>> ";
@@ -175,9 +167,13 @@ int main()
           cout << "\033[31mERRO: Cidade informada não está cadastrada. Tente novamente!\033[0m" << endl;
           break;
         }
-
+        if(controle.verificarPassageiro(nomePassageiro, localAtual))
+        {
+          cout << "\033[31mERRO: Passageiro informado já está cadastrado nessa localização. Tente novamente!\033[0m" << endl;
+          break;
+        }
         controle.cadastrarPassageiro(nomePassageiro, localAtual);
-
+        
         break;
       case 5:
         limparTela();

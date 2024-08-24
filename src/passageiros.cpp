@@ -1,9 +1,10 @@
 #include "../include/passageiro.hpp"
 
-Passageiro::Passageiro(string nome, Cidade* localAtual)
+Passageiro::Passageiro(string nome, Cidade* localAtual, bool emTransito)
 {
   this->nome = nome;
   this->localAtual = localAtual;
+  this->emTransito = emTransito;
 }
 
 string Passageiro::getNome()

@@ -32,29 +32,41 @@ void ControladorDeTransito::carregarTransportes()
   {
     while(getline(arquivo, linha))
     {
-        istringstream xx(linha);
-        string nome, localAtualS;
-        int tipo, capacidade, distanciaDescansos, tempoDescanso;
-        float velocidade;
-        Cidade* localAtual = nullptr;
+      istringstream xx(linha);
+      string nome, localAtualS, entrada;
+      int tipo, capacidade, distanciaDescansos, tempoDescanso;
+      float velocidade;
+      bool emTransito;
 
-        getline(xx, nome, ',');
-        xx >> tipo;
-        xx.ignore();
-        xx >> capacidade;
-        xx.ignore();
-        xx >> velocidade;
-        xx.ignore();
-        xx >> distanciaDescansos;
-        xx.ignore();
-        xx >> tempoDescanso;
-        xx.ignore();
-        getline(xx, localAtualS);
-        localAtual = new Cidade(localAtualS);
-        
-        Transporte* trajetoArquivo = new Transporte(nome, tipo, capacidade, velocidade, distanciaDescansos, tempoDescanso, localAtual);
+      Cidade* localAtual = nullptr;
 
-        listaTransportes.push_back(trajetoArquivo);
+      getline(xx, nome, ',');
+      xx >> tipo;
+      xx.ignore();
+      xx >> capacidade;
+      xx.ignore();
+      xx >> velocidade;
+      xx.ignore();
+      xx >> distanciaDescansos;
+      xx.ignore();
+      xx >> tempoDescanso;
+      xx.ignore();
+      getline(xx, localAtualS, ',');
+      getline(xx, entrada);
+      if(entrada == "false")
+      {
+        emTransito = false;
+      }
+      else if(entrada == "true")
+      {
+        emTransito = true;
+      }
+
+      localAtual = new Cidade(localAtualS);
+
+      Transporte* trajetoArquivo = new Transporte(nome, tipo, capacidade, velocidade, distanciaDescansos, tempoDescanso, localAtual, emTransito);
+
+      listaTransportes.push_back(trajetoArquivo);
     }
   }
 }
@@ -67,17 +79,25 @@ void ControladorDeTransito::carregarPassageiros()
   {
     while(getline(arquivo, linha)){
       istringstream xx(linha);
-      string nome, localAtualS;
-      
+      string nome, localAtualS, entrada;
+      bool emTransito;
+
       getline(xx, nome, ',');
       getline(xx, localAtualS, ',');
+      getline(xx, entrada);
+      if(entrada == "false")
+      {
+        emTransito = false;
+      }
+      else if(entrada == "true")
+      {
+        emTransito = true;
+      }
+      Cidade* localAtual = new Cidade(localAtualS);
 
-      Cidade* localAtual = nullptr;
-      localAtual = new Cidade(localAtualS);
+      Passageiro* passageiroArquivo = new Passageiro(nome, localAtual, emTransito);
 
-      Passageiro* PassageiroArquivo = new Passageiro(nome, localAtual);
-
-      listaPassageiros.push_back(PassageiroArquivo);
+      listaPassageiros.push_back(passageiroArquivo);
     }
   }
 }
@@ -100,8 +120,8 @@ void ControladorDeTransito::carregarTrajetos()
       xx.ignore();
       xx >> distancia;
 
-      Cidade* destino = new Cidade(origemS);
-      Cidade* origem = new Cidade(destinoS);
+      Cidade* origem = new Cidade(origemS);
+      Cidade* destino = new Cidade(destinoS);
 
       Trajeto* TrajetoArquivo = new Trajeto(origem, destino, tipo, distancia);
 

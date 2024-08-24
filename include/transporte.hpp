@@ -19,7 +19,7 @@ class Transporte
     Cidade* localAtual;
     bool emTransito;
   public:
-    Transporte(string nome, int tipo, int capacidade, float velocidade, int distanciaDescansos, int tempoDescanso, Cidade* localAtual);
+    Transporte(string nome, int tipo, int capacidade, float velocidade, int distanciaDescansos, int tempoDescanso, Cidade* localAtual, bool emTransito);
     string getNome();
     int getTipo();
     int getCapacidade();
