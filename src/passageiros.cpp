@@ -20,3 +20,13 @@ void Passageiro::setLocalAtual(Cidade* local)
 {
   this->localAtual = local;
 }
+
+bool Passageiro::getEmTransito()
+{
+  return emTransito;
+}
+
+void Passageiro::setEmTransito(bool status)
+{
+  emTransito = status;
+}

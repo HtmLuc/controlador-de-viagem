@@ -1,5 +1,4 @@
 #include <string>
-#include <iostream>
 #include "../include/controladorDeTransito.hpp"
 
 // Retorna verdadeiro caso a cidade exista e falso caso contrário

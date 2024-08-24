@@ -3,7 +3,6 @@
 
 #include <list>
 #include "transporte.hpp"
-#include "trajeto.hpp"
 #include "passageiro.hpp"
 
 using namespace std; 
@@ -12,7 +11,7 @@ class Viagem
 {
 private:
   Transporte* transporte;
-  list<Passageiro*> passageiros;
+  list<Passageiro*> listaPassageiros;
   Cidade* origem;
   Cidade* destino;
   Viagem* proxima;

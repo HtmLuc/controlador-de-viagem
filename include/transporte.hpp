@@ -17,6 +17,7 @@ class Transporte
     int tempoDescanso;
     int tempoDescansoAtual;
     Cidade* localAtual;
+    bool emTransito;
   public:
     Transporte(string nome, int tipo, int capacidade, float velocidade, int distanciaDescansos, int tempoDescanso, Cidade* localAtual);
     string getNome();
@@ -29,6 +30,9 @@ class Transporte
     Cidade* getLocalAtual();
     
     void setLocalAtual(Cidade* cidade);
+
+    bool getEmTransito();
+    void setEmTransito(bool status);
 };
 
 #endif

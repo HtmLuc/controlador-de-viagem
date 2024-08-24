@@ -52,3 +52,13 @@ void Transporte::setLocalAtual( Cidade* cidade )
 {
   this->localAtual = cidade;
 }
+
+bool Transporte::getEmTransito()
+{
+  return emTransito;
+}
+
+void Transporte::setEmTransito(bool status)
+{
+  this->emTransito = status;
+}
