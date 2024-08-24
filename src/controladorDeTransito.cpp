@@ -78,7 +78,7 @@ void ControladorDeTransito::cadastrarPassageiro(string nome, string localAtual)
     cout << "Passageiro cadastrado com sucesso!" << endl;
     arquivo.close();
 
-    // Cadasstrar novo passageiro NA LISTA
+    // Cadastrar novo passageiro NA LISTA
     Cidade* cidadeAtual = new Cidade(localAtual);
     Passageiro* novoPassageiro = new Passageiro(nome, cidadeAtual);
     listaPassageiros.push_back(novoPassageiro);
