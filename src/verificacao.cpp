@@ -61,3 +61,15 @@ bool ControladorDeTransito::VerificarTrajeto(string origem, string destino, int 
   }
   return false;
 }
+
+bool ControladorDeTransito::verificarNomePassageiro(string nome)
+{
+  for(auto& passageiro : listaPassageiros)
+  {
+    if(passageiro->getNome() == nome)
+    {
+      return true;
+    }
+  }
+  return false;
+}

@@ -123,3 +123,39 @@ void ControladorDeTransito::avancarHoras(int horas)
 void ControladorDeTransito::relatarEstado()
 {
 }
+
+void ControladorDeTransito::IniciarTransporte(string nomeTransporte, string localOrigem, int tipo)
+{
+  for(auto& transporte : listaTransportes){
+    if(transporte->getNome() == nomeTransporte){
+      if(transporte->getLocalAtual()->getNome() == localOrigem){
+        // verifiacar se é do mesmo tipo;
+        cout << "Esse transporte tem capacidade para " << transporte->getCapacidade() << "." << endl;
+        cout << "Quantas deseja cadastrar na viagem?" << endl;
+        cout << ">>>" << endl;
+        int qnt;
+        cin >> qnt;
+        for(int i = 0; i < qnt; i++)
+        {
+          cout << "Passageiro " << i+1 << ":";
+          string nomePassageiro;
+          getline(cin, nomePassageiro);
+          while(!verificarNomePassageiro(nomePassageiro))
+          {
+            cout << "\033[31mERRO: Passageiro não está cadastrado. Tente novamente! \033[0m" << endl;
+            cout << "Passageiro " << i+1 << ":";
+            getline(cin, nomePassageiro);
+          }
+
+          // adicionar passsageiro na lista de passageiros da viagem;
+        }
+
+      }
+      else{
+        cout << "\033[31mERRO: Transporte informado não está cadastrado. Tente novamente! \033[0m" << endl;
+        return;
+        // retornar que nao está no local de origem da viagem;
+      }
+    }
+  }
+}
