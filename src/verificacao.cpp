@@ -41,7 +41,7 @@ bool ControladorDeTransito::verificarTransporte(string nomeTransporte, int tipo,
 
 bool ControladorDeTransito::verificarTransporteNome(string nome)
 {
-  for(auto transporte : listaTransportes)
+  for(auto& transporte : listaTransportes)
   {
     if(transporte->getNome() == nome)
     {

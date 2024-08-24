@@ -113,6 +113,11 @@ void ControladorDeTransito::iniciarViagem(string nomeTransporte, string nomeOrig
 
 void ControladorDeTransito::avancarHoras(int horas)
 {
+  for(auto& viagem : listaViagens)
+  {
+    viagem->avancarHoras(horas);
+  }
+
 }
 
 void ControladorDeTransito::relatarEstado()
