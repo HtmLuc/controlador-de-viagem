@@ -46,6 +46,10 @@ class ControladorDeTransito{
     bool verificarTransporte(string nome, int tipo, int capacidade, float velocidade, float distanciaDescansos, int tempoDescanso, string localAtual);
     bool verificarTransporteNome(string nome);
     bool VerificarTrajeto(string origem, string destino, int tipo, float distancia);
+    bool verificarLocalAtualTransporte(string nome_transporte, string localAtual);
+    bool verificarNomePassageiro(string nome);
+
+    void IniciarTransporte(string nomeTransporte, string localOrigem, int tipo);
 };  
 
 #endif
