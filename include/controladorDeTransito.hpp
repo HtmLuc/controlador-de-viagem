@@ -30,7 +30,7 @@ class ControladorDeTransito{
 
     vector<string> calcularMelhorTrajeto(string origem, string destino);
 
-    void iniciarViagem(string nomeTransporte, list<string> nomesPassageiros, string nomeOrigem, string nomeDestino);
+    void iniciarViagem(string nomeTransporte, string nomeOrigem, string nomeDestino);
     void avancarHoras(int horas);
     void relatarEstado();
     
@@ -44,7 +44,8 @@ class ControladorDeTransito{
     bool verificarCidade(string nome);
     bool verificarPassageiro(string nome, string localAtual);
     bool verificarTransporte(string nome, int tipo, int capacidade, float velocidade, float distanciaDescansos, int tempoDescanso, string localAtual);
+    bool verificarTransporteNome(string nome);
     bool VerificarTrajeto(string origem, string destino, int tipo, float distancia);
-};
+};  
 
 #endif
