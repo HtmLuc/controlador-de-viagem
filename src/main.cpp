@@ -55,7 +55,7 @@ int main()
       {
         controle.cadastrarCidade(nomeCidade);
       }
-        
+
       break;
     case 2:
       limparTela();
@@ -182,7 +182,28 @@ int main()
 
       break;
     case 5:
-      cout << "case 5" << endl;
+      cout << "=-=-=-=-INICIAR VIAGEM-=-=-=-=" << endl
+           << endl;
+      cout << "Informe o local de origem:" << endl;
+      cout << ">>> ";
+      getline(cin, nomeOrigem);
+      if (controle.verificarCidade(nomeOrigem))
+      {
+        cout << "\033[31mERRO: Cidade informada não está cadastrada. Tente novamente!\033[0m" << endl;
+        break;
+      }
+      cout << "Informe o local de destino:" << endl;
+      cout << ">>> ";
+      getline(cin, nomeDestino);
+      if (controle.verificarCidade(nomeDestino))
+      {
+        cout << "\033[31mERRO: Cidade informada não está cadastrada. Tente novamente!\033[0m" << endl;
+        break;
+      }
+      else
+      {
+        // verificar se existe trajeto
+      }
       // iniciarViagem(nomeTransporte, nomesPassageiros, nomeOrigem, nomeDestino);
       break;
     case 6:
