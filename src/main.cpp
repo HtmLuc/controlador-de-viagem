@@ -229,10 +229,10 @@ int main()
       case 6:
         cout << "case 6" << endl;
         // avancarHoras(horas);
-        break;
+        break; */
       case 7:
-        cout << "case 7" << endl;
-        // relatarEstado();
+        cout << "=-=-=-=-RELATAR ESTADO-=-=-=-=" << endl;
+        controle.relatarEstado();
         break;
     }
   } while (opcao != 0);
