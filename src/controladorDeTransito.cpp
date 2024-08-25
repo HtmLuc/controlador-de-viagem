@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <limits>
 #include "../include/controladorDeTransito.hpp"
 
 using namespace std;
@@ -16,7 +17,7 @@ void ControladorDeTransito::cadastrarCidade(string nome)
     arquivo.close();
   }
   else
-  {
+{
     cout << "\033[31mERRO: Não foi possível abir o arquivo para escrita.\033[0m" << endl;
   }
 
@@ -47,7 +48,7 @@ void ControladorDeTransito::cadastrarTrajeto(string nomeOrigem, string nomeDesti
 
 void ControladorDeTransito::cadastrarTransporte(string nome, int tipo, int capacidade, float velocidade, float distanciaDescansos, int tempoDescanso, string localAtual)
 {
-  
+
   ofstream arquivo("data/transporte.txt", ios::app);
   if(arquivo.is_open())
   {
@@ -62,7 +63,7 @@ void ControladorDeTransito::cadastrarTransporte(string nome, int tipo, int capac
     listaTransportes.push_back(novaCidade);
   }
   else
-  {
+{
     cout << "\033[31mERRO: Não foi possível abrir o arquivo para escrita." << endl;
   }
 }
@@ -95,20 +96,93 @@ vector<string> ControladorDeTransito::calcularMelhorTrajeto(string origem, strin
 
 void ControladorDeTransito::iniciarViagem(string nomeTransporte, string nomeOrigem, string nomeDestino)
 {
-  vector<string> melhorCaminho = calcularMelhorTrajeto(nomeOrigem, nomeDestino);
+  Cidade* cidadeOrigem = nullptr;
+  Cidade* cidadeDestino = nullptr;
 
-  if (melhorCaminho.empty()) 
-  { 
-    cout << "\033[31mERRO: Não foi encontrado um trajeto entre as cidades informadas.\033[0m" << endl;
+  for (auto& cidade : listaCidades)
+  {
+    if (cidade->getNome() == nomeOrigem)
+    {
+      cidadeOrigem = cidade;
+    }
+    else if (cidade->getNome() == nomeDestino)
+    {
+      cidadeDestino = cidade;
+    }
+  }
+
+  if (cidadeOrigem == nullptr || cidadeDestino == nullptr)
+  {
+    cout << "\033[31mERRO: Cidade de origem ou destino não encontrada.\033[0m" << endl;
     return;
   }
 
-  cout << "Melhor trajeto de " << nomeOrigem << " para " << nomeDestino << ":" << endl;
-  for (auto& cidade : melhorCaminho)
+  Transporte* transporteEscolhido = nullptr;
+  for (auto& transporte : listaTransportes)
   {
-    cout << cidade << " -> ";
+    if (transporte->getNome() == nomeTransporte)
+    {
+      transporteEscolhido = transporte;
+      break;
+    }
   }
-  cout << "CHEGADA" << endl;
+
+  if (transporteEscolhido == nullptr)
+  {
+    cout << "\033[31mERRO: Transporte não encontrado.\033[0m" << endl;
+    return;
+  }
+
+  if (transporteEscolhido->getLocalAtual()->getNome() != nomeOrigem)
+  {
+    cout << "\033[31mERRO: O transporte não está na cidade de origem.\033[0m" << endl;
+    return;
+  }
+
+  cout << "Digite os nomes dos passageiros (Digite 0 para terminar):" << endl;
+  string nome;
+  list<Passageiro*> passageirosNaOrigem;
+  while (true)
+  {
+    getline(cin, nome);
+    if (nome == "0")
+    {
+      break;
+    }
+
+    bool passageiroEncontrado = false;
+    for (auto& passageiro : listaPassageiros)
+    {
+      if (passageiro->getNome() == nome && passageiro->getLocalAtual()->getNome() == nomeOrigem)
+      {
+        passageirosNaOrigem.push_back(passageiro);
+        passageiroEncontrado = true;
+        break;
+      }
+    }
+
+    if (!passageiroEncontrado)
+    {
+      cout << "\033[31mERRO: Passageiro " << nome << " não encontrado na cidade de origem.\033[0m" << endl;
+    }
+  }
+
+  // Salvar a viagem no arquivo (essa parte precisará ser ajustada para serializar corretamente os dados)
+  ofstream arquivo("data/viagem.txt", ios::app);
+  if (arquivo.is_open())
+  {
+    // Exemplo de salvamento básico - você deve decidir como serializar adequadamente os dados
+    arquivo << nomeTransporte << "," << nomeOrigem << "," << nomeDestino << "," << passageirosNaOrigem.size() << " passageiros" << endl;
+    arquivo.close();
+  }
+  else
+{
+    cout << "\033[31mERRO: Não foi possível abrir o arquivo para escrita.\033[0m" << endl;
+  }
+
+  Viagem* novaViagem = new Viagem(transporteEscolhido, passageirosNaOrigem, cidadeOrigem, cidadeDestino);
+  novaViagem->iniciarViagem();
+  listaViagens.push_back(novaViagem);
 }
 
 void ControladorDeTransito::avancarHoras(int horas)
@@ -117,45 +191,8 @@ void ControladorDeTransito::avancarHoras(int horas)
   {
     viagem->avancarHoras(horas);
   }
-
 }
 
 void ControladorDeTransito::relatarEstado()
 {
-}
-
-void ControladorDeTransito::IniciarTransporte(string nomeTransporte, string localOrigem, int tipo)
-{
-  for(auto& transporte : listaTransportes){
-    if(transporte->getNome() == nomeTransporte){
-      if(transporte->getLocalAtual()->getNome() == localOrigem){
-        // verifiacar se é do mesmo tipo;
-        cout << "Esse transporte tem capacidade para " << transporte->getCapacidade() << "." << endl;
-        cout << "Quantas deseja cadastrar na viagem?" << endl;
-        cout << ">>>" << endl;
-        int qnt;
-        cin >> qnt;
-        for(int i = 0; i < qnt; i++)
-        {
-          cout << "Passageiro " << i+1 << ":";
-          string nomePassageiro;
-          getline(cin, nomePassageiro);
-          while(!verificarNomePassageiro(nomePassageiro))
-          {
-            cout << "\033[31mERRO: Passageiro não está cadastrado. Tente novamente! \033[0m" << endl;
-            cout << "Passageiro " << i+1 << ":";
-            getline(cin, nomePassageiro);
-          }
-
-          // adicionar passsageiro na lista de passageiros da viagem;
-        }
-
-      }
-      else{
-        cout << "\033[31mERRO: Transporte informado não está cadastrado. Tente novamente! \033[0m" << endl;
-        return;
-        // retornar que nao está no local de origem da viagem;
-      }
-    }
-  }
 }
