@@ -196,7 +196,7 @@ void ControladorDeTransito::avancarHoras(int horas)
 void ControladorDeTransito::relatarEstado()
 {
   //Relatar onde está cada pessoa
-  cout << "Relatório do local de cada passageiro" << endl;
+  cout << "\033[1m\033[33mRelatório do local de cada passageiro\033[0m" << endl;
   for(const auto& passageiro: listaPassageiros){
     if(passageiro->getEmTransito()){
       cout << passageiro->getNome() << " está em trânsito." << endl;
@@ -206,9 +206,10 @@ void ControladorDeTransito::relatarEstado()
       cout << passageiro->getNome() << " está em " << passageiro->getLocalAtual()->getNome() << endl;
     }
   }
+  cout << endl;
 
   //Relatar onde está cada transporte
-  cout << "Relatório do local de cada transporte" << endl;
+  cout << "\033[1m\033[33mRelatório do local de cada transporte\033[0m" << endl;
   for (const auto& transporte : listaTransportes) {
     if (transporte->getEmTransito()) {
       cout << transporte->getNome() << " está em trânsito." << endl;
@@ -217,15 +218,11 @@ void ControladorDeTransito::relatarEstado()
       cout << transporte->getNome() << " está em " << transporte->getLocalAtual()->getNome() << endl;
     }
   }
+  cout << endl;
 
   //Relatar todas as viagens em andamento
-  cout << "Relatório de todas as viagens em andamento" << endl;
+  cout << "\033[1m\033[33mRelatório de todas as viagens em andamento\033[0m" << endl;
   for (const auto& viagem : listaViagens) {
         viagem->relatarEstado();
   }
-
-  //Relatar todas as cidade mais visitadas
-  cout << "Relatório das cidades mais visitadas" << endl;
-  //A se fazer
-
 }

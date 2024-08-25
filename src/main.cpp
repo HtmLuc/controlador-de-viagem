@@ -16,7 +16,7 @@ int main()
   ControladorDeTransito controle;
   int opcao;
   string nomeCidade, nomeTransporte, localAtual, nomePassageiro, nomeOrigem, nomeDestino;
-  int capacidade, tempoDescanso, entrada, tipo;
+  int capacidade, tempoDescanso, tipo, horas;
   float velocidade, distanciaDescanso, distanciaTrajeto;
   bool nomeValido = false;
 
@@ -227,11 +227,24 @@ int main()
         controle.iniciarViagem(nomeTransporte, nomeOrigem, nomeDestino);
         break;
       case 6:
-        cout << "case 6" << endl;
-        // avancarHoras(horas);
-        break; */
+        limparTela();
+        cout << "=-=-=-=-AVANÇAR HORAS-=-=-=-=" << endl;
+        
+        cout << "Informe a quantidade de horas que você quer avançar:" << endl;
+        cin >> horas;
+        if(horas > 0)
+        {
+          controle.avancarHoras(horas);
+        }
+        else 
+        {
+          cout << "\033[31mNão foi possível avançar horas. Tente novamente!\033[0m" << endl;
+        }
+        break;
       case 7:
+        limparTela();
         cout << "=-=-=-=-RELATAR ESTADO-=-=-=-=" << endl;
+
         controle.relatarEstado();
         break;
     }
