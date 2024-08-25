@@ -104,28 +104,57 @@ void ControladorDeTransito::carregarPassageiros()
 
 void ControladorDeTransito::carregarTrajetos()
 {
-  ifstream arquivo("data/trajeto.txt");
+  ifstream arquivo("data/viagem.txt");
   string linha;
-  if(arquivo.is_open())
-  {
-    while(getline(arquivo, linha)){
-      istringstream xx(linha);
-      string origemS, destinoS;
-      int tipo;
-      float distancia;
 
-      getline(xx, origemS, ',');
-      getline(xx, destinoS, ',');
-      xx >> tipo;
-      xx.ignore();
-      xx >> distancia;
+  if (arquivo.is_open()) {
+    while (getline(arquivo, linha)) {
+      istringstream ss(linha);
+      string nomeTransporte, nomeOrigem, nomeDestino, nomePassageiro;
+      list<Passageiro*> passageiros;
 
-      Cidade* origem = new Cidade(origemS);
-      Cidade* destino = new Cidade(destinoS);
+      getline(ss, nomeTransporte, ',');
+      getline(ss, nomeOrigem, ',');
+      getline(ss, nomeDestino, ',');
 
-      Trajeto* TrajetoArquivo = new Trajeto(origem, destino, tipo, distancia);
+      // Criar ponteiros para a origem e destino
+      Cidade* origem = nullptr;
+      Cidade* destino = nullptr;
+      Transporte* transporte = nullptr;
 
-      listaTrajetos.push_back(TrajetoArquivo);
+      // Encontrar as cidades na lista de cidades
+      for (auto& cidade : listaCidades) {
+        if (cidade->getNome() == nomeOrigem) {
+          origem = cidade;
+        } else if (cidade->getNome() == nomeDestino) {
+          destino = cidade;
+        }
+      }
+
+      // Encontrar o transporte na lista de transportes
+      for (auto& t : listaTransportes) {
+        if (t->getNome() == nomeTransporte) {
+          transporte = t;
+          break;
+        }
+      }
+
+      // Carregar passageiros
+      while (getline(ss, nomePassageiro, ',')) {
+        for (auto& passageiro : listaPassageiros) {
+          if (passageiro->getNome() == nomePassageiro && passageiro->getLocalAtual()->getNome() == nomeOrigem) {
+            passageiros.push_back(passageiro);
+            break;
+          }
+        }
+      }
+
+      // Criar uma nova viagem e adicioná-la à lista de viagens
+      if (origem && destino && transporte) {
+        Viagem* viagem = new Viagem(transporte, passageiros, origem, destino);
+        listaViagens.push_back(viagem);
+      }
     }
+    arquivo.close();
   }
 }

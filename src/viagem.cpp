@@ -49,7 +49,7 @@ void Viagem::avancarHoras(int horas)
     cout << "Viagem concluída!" << endl;
   }
   else
-  {
+{
     cout << "Cidade em progresso. Distancia restante: " << distanciaRestante << "km." << endl;
   }
 }
@@ -63,7 +63,7 @@ void Viagem::relatarEstado()
     cout << "Tempo decorrido: " << tempoDecorrido << "km." << endl;
   }
   else
-  { 
+{ 
     cout << "Viagem já chegou ao destino: " << destino->getNome() << endl;
   }
 }

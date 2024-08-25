@@ -229,7 +229,7 @@ int main()
       case 6:
         limparTela();
         cout << "=-=-=-=-AVANÇAR HORAS-=-=-=-=" << endl;
-        
+
         cout << "Informe a quantidade de horas que você quer avançar:" << endl;
         cin >> horas;
         if(horas > 0)
@@ -237,7 +237,7 @@ int main()
           controle.avancarHoras(horas);
         }
         else 
-        {
+      {
           cout << "\033[31mNão foi possível avançar horas. Tente novamente!\033[0m" << endl;
         }
         break;
